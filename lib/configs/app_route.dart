@@ -35,6 +35,14 @@ class AppRoute {
   static const String email = '/email';
   static const String resetPass = '/resetPass';
 
+  static const List<String> mainRoutes = [
+    AppRoute.home,
+    AppRoute.gate,
+    AppRoute.setting,
+    AppRoute.search,
+    AppRoute.bag,
+  ];
+
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoute.login:
@@ -75,20 +83,15 @@ class AppRoute {
           builder: (context) {
             Map arg = settings.arguments;
             return FilterScreen(
-                bannerId: arg['bannerId'],
-                isBannerScreen: arg['isBannerScreen']);
+              categoryId: arg['categoryId'],
+            );
           },
           settings: settings,
         );
       case AppRoute.banner:
         return MaterialPageRoute(
           builder: (context) {
-            Map arg = settings.arguments;
-            return BannerScreen(
-                bannerId: arg['bannerId'],
-                sort: arg['sort'],
-                minPrice: arg['minPrice'],
-                maxPrice: arg['maxPrice']);
+            return BannerScreen();
           },
           settings: settings,
         );

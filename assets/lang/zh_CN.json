@@ -156,5 +156,9 @@
   "codeIncorrect": "不正确的代码!!!",
   "resetPass": "重置密码",
   "emailAlready": "電子郵件已經存在",
-  "phoneAlready": "手機已經存在"
+  "phoneAlready": "手機已經存在",
+  "confirmExitApp": "您要退出应用程序吗?",
+  "yes": "是",
+  "no": "不",
+  "close": "关闭"
 }

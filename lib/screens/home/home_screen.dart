@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                       AppBloc.bannerBloc.add(BannerGetOne(Id: e.id));
                       AppBloc.productBloc
                           .add(ProductGetOfCate(categoryId: e.id));
-                      Navigator.pushReplacementNamed(context, AppRoute.banner, arguments: {'bannerId': e.id});
+                      Navigator.pushReplacementNamed(context, AppRoute.banner);
                     },
                   );
                 }).toList();

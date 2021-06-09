@@ -1,3 +1,4 @@
+import 'package:florist/blocs/blocs.dart';
 import 'package:florist/configs/app_color.dart';
 import 'package:florist/configs/configs.dart';
 import 'package:florist/screens/components/components.dart';
@@ -6,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 
 class FilterScreen extends StatefulWidget {
-  int bannerId;
+  int categoryId;
   bool isBannerScreen;
 
-  FilterScreen({this.bannerId, this.isBannerScreen});
+  FilterScreen({this.categoryId, this.isBannerScreen});
 
   @override
   _FilterScreenState createState() => _FilterScreenState();
@@ -17,7 +18,7 @@ class FilterScreen extends StatefulWidget {
 
 class _FilterScreenState extends State<FilterScreen> {
   String sort = 'price';
-  double _lowerValue = 10000;
+  double _lowerValue = 0;
   double _upperValue = 250000;
 
   @override
@@ -72,21 +73,18 @@ class _FilterScreenState extends State<FilterScreen> {
               height: 50,
             ),
             GestureDetector(
-              onTap: () {/*
-                print(sort);
-                print(_lowerValue);
-                print(_upperValue);*/
-                Navigator.pushNamed(
-                    context,
+              onTap: () {
+                AppBloc.productBloc.add(ProductGetOfCate(
+                  categoryId: widget.categoryId,
+                  sort: sort,
+                  minPrice: _lowerValue,
+                  maxPrice: _upperValue,
+                ));
+                Navigator.pop(context);
+                /*Navigator.pushNamed(context,
                     widget.isBannerScreen
                         ? AppRoute.banner
-                        : AppRoute.productList,
-                    arguments: {
-                      'bannerId': widget.bannerId,
-                      'sort': sort,
-                      'minPrice': _lowerValue,
-                      'maxPrice': _upperValue,
-                    });
+                        : AppRoute.productList);*/
               },
               child: _builtBtn(
                   btnColor: AppColor.greenMain,

@@ -7,21 +7,33 @@ class LayoutWhiteNotScroll extends StatelessWidget {
   final Widget child;
   final Widget header;
 
-  const LayoutWhiteNotScroll({Key key, this.child, this.header}) : super(key: key);
+  const LayoutWhiteNotScroll({Key key, this.child, this.header})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppScreen(
-      child: Container(
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: AppColor.whiteMain,
-            appBar: header,
-            body: Container(
-              child: child,
+    String currentRoute = ModalRoute.of(context).settings.name;
+    return WillPopScope(
+      onWillPop: () async {
+        if (!AppRoute.mainRoutes.contains(currentRoute)) {
+          Navigator.pushReplacementNamed(context, AppRoute.home);
+        } else {
+          BackDialog.showMyDialog(context);
+        }
+        return false;
+      },
+      child: AppScreen(
+        child: Container(
+          child: SafeArea(
+            child: Scaffold(
+              backgroundColor: AppColor.whiteMain,
+              appBar: header,
+              body: Container(
+                child: child,
+              ),
+              bottomNavigationBar: BottomMenu(),
+              extendBody: true,
             ),
-            bottomNavigationBar: BottomMenu(),
-            extendBody: true,
           ),
         ),
       ),

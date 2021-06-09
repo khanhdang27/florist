@@ -25,6 +25,12 @@ class _CircularState extends State<Circular> with SingleTickerProviderStateMixin
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) =>
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),

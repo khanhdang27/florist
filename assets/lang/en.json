@@ -156,5 +156,9 @@
   "codeIncorrect": "Incorrect code!!!",
   "resetPass": "Reset Password",
   "emailAlready": "Email already exists",
-  "phoneAlready": "Phone already exists"
+  "phoneAlready": "Phone already exists",
+  "confirmExitApp": "Do you want to exit the application?",
+  "yes": "Yes",
+  "no": "No",
+  "close": "Close"
 }

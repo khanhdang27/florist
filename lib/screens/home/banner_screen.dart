@@ -1,3 +1,4 @@
+import 'package:florist/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,26 +11,14 @@ import 'package:florist/screens/home/banner_header_bar.dart';
 
 import 'product_widget.dart';
 
-class BannerScreen extends StatelessWidget {
-  final int bannerId;
-  final String sort;
-  final double minPrice;
-  final double maxPrice;
+class BannerScreen extends StatefulWidget {
+  @override
+  _BannerScreenState createState() => _BannerScreenState();
+}
 
-  BannerScreen({this.bannerId, this.sort, this.minPrice, this.maxPrice}) {
-    AppBloc.productBloc.add(ProductGetRecom());
-  }
-
+class _BannerScreenState extends State<BannerScreen> {
   @override
   Widget build(BuildContext context) {
-    print("<====Hello may cung====>");
-    print(bannerId);
-    print("<====Hello may cung====>");
-    print(sort);
-    print("<====Hello may cung====>");
-    print(minPrice);
-    print("<====Hello may cung====>");
-    print(maxPrice);
     return Layout(
         header: BannerHeaderBar(
           press: () {
@@ -41,7 +30,6 @@ class BannerScreen extends StatelessWidget {
             BlocBuilder(
               builder: (context, state) {
                 if (state is BannerGetOneSuccess) {
-                  print(state.item);
                   return _Banner(
                     image: state.item.image == null
                         ? state.item.image
@@ -51,17 +39,19 @@ class BannerScreen extends StatelessWidget {
                     id: state.item.id,
                   );
                 }
-
                 return Center(child: Circular());
               },
               bloc: AppBloc.bannerBloc,
+              buildWhen: (previous, current) {
+                return current is BannerGetOneSuccess;
+              },
             ),
             BlocBuilder(
               builder: (context, state) {
-                //  if (state is ProductGetOfCateSuccess) {
-                if (state is ProductGetRecomSuccess) {
+                if (state is ProductGetOfCateSuccess) {
+                  List<Product> listProduct = state.items;
                   return Column(
-                    children: state.items.map((e) {
+                    children: listProduct.map((e) {
                       return GestureDetector(
                         child: ProductWidget(
                           name: e.name,
@@ -85,10 +75,9 @@ class BannerScreen extends StatelessWidget {
                 return Center(child: Circular());
               },
               bloc: AppBloc.productBloc,
-              buildWhen: (previous, current) {
-                //   return current is ProductGetOfCateSuccess;
-                return current is ProductGetRecomSuccess;
-              },
+              /*buildWhen: (previous, current) {
+                return current is ProductGetOfCateSuccess;
+              },*/
             ),
             SizedBox(height: 100),
           ],
@@ -166,7 +155,7 @@ class _Banner extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              GestureDetector(
+              InkWell(
                 child: Container(
                   margin: EdgeInsets.only(right: 20, bottom: 30),
                   child: Icon(
@@ -175,8 +164,9 @@ class _Banner extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
+                  AppBloc.productBloc.add(ProductReset());
                   Navigator.pushNamed(context, AppRoute.filter,
-                      arguments: {'bannerId': id, 'isBannerScreen': true});
+                      arguments: {'categoryId': id});
                 },
               )
             ],
