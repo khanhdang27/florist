@@ -1,0 +1,126 @@
+name: florist
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.0
+  flutter_bloc: ^7.0.0
+  equatable: ^2.0.0
+  flutter_xlider: ^3.4.0
+  pin_code_fields: ^7.0.0
+  pin_code_text_field: ^1.8.0
+  provider: ^5.0.0
+  dio: ^4.0.0
+  http: ^0.13.3
+  http_parser: ^4.0.0
+  get: ^4.1.4
+  carousel_slider: ^3.0.0
+  flutter_swiper: ^1.1.6
+  shared_preferences: ^2.0.5
+  intl: ^0.17.0
+  email_validator: ^2.0.1
+  firebase_core: ^1.1.0
+  firebase_auth: ^1.1.2
+  cloud_firestore: ^1.0.7
+  fluttertoast: ^8.0.6
+  flutter_credit_card: ^2.0.0
+  stripe_payment: ^1.1.0
+  progress_dialog: ^1.2.2
+  mask_text_input_formatter: ^1.2.1
+  intl_phone_number_input: ^0.7.0+2
+  google_sign_in: ^5.0.2
+  flutter_facebook_auth: ^3.3.3+1
+  #international_phone_input: ^1.0.4
+  flutter_rating_bar: ^4.0.0
+  flutter_html: ^2.0.0
+  path_provider: ^2.0.2
+  sqflite: ^2.0.0+3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/speaker.png
+    - assets/images/car-outline.png
+    - assets/images/facebook.png
+    - assets/images/gmail.png
+    - assets/images/logo.png
+    - assets/images/app_icon.png
+    - assets/images/instagram.png
+    - assets/images/mewe.png
+    - assets/images/wechat.png
+    - assets/images/whatsapp.png
+    - assets/images/header_bg.png
+    - assets/images/background.png
+    - assets/images/banner1.png
+    - assets/images/bong.png
+    - assets/images/bong2.png
+    - assets/images/icons/icon_flower.png
+    - assets/images/icons/icon_user.png
+    - assets/images/icons/icon_bag.png
+    - assets/images/icons/icon_bag2.png
+    - assets/images/icons/icon_bag_white.png
+    - assets/images/icons/icon_search.png
+    - assets/images/icons/icon_favou.png
+    - assets/images/icons/icon_star.png
+    - assets/images/icons/icon_tim.png
+    - assets/images/icons/icon_setting.png
+    - assets/images/icons/icon_setting_w.png
+    - assets/images/icons/icon_X.png
+    - assets/images/icons/icon_3cham.png
+    - assets/images/icons/icon_share.png
+    - assets/images/icons/icon_thungrac.png
+    - assets/images/icons/icon_3chamxam.png
+    - assets/images/lastRecom1.png
+    - assets/images/avatar.png
+    - assets/images/paidSuccess.png
+    - assets/images/check_flower.png
+    - assets/images/mail_flower.png
+    - assets/images/icon_logo.png
+    - assets/images/name.png
+    - assets/images/address.png
+    - assets/images/noCoupon.png
+    - assets/images/visa.png
+    - assets/lang/
+
+  fonts:
+    - family: LiGoThic
+      fonts:
+        - asset: assets/fonts/LiGoThic.ttf
+    - family: PingFang-SC
+      fonts:
+        - asset: assets/fonts/PingFangSC.ttf
+    - family: PingFang-TC
+      fonts:
+        - asset: assets/fonts/PingFangTC.ttf
+    - family: PingFang-HK
+      fonts:
+        - asset: assets/fonts/PingFangHK.ttf
+    - family: Avenir-Book
+      fonts:
+        - asset: assets/fonts/Avenir-Book.otf
+    - family: AppIcon
+      fonts:
+        - asset: assets/fonts/AppIcon.ttf
+    - family: ConsolaB
+      fonts:
+        - asset: assets/fonts/consolab.ttf
+    - family: Poppins-Regular
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
