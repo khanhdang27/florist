@@ -19,6 +19,7 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreen extends State<ProductDetailScreen> {
+  int quantity = 1;
   bool fav = false;
 
   final TextEditingController contentController = new TextEditingController();
@@ -60,7 +61,6 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                           ? NetworkImage(images[0].src)
                           : AssetImage(AppAsset.bong),
                     ),
-                    //                    image: AssetImage(AppAsset.bong)),
                   ),
                   child: Column(
                     children: [
@@ -159,7 +159,7 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                               Container(
                                 margin: EdgeInsets.only(bottom: 5),
                                 child: Text(
-                                  '${state.item.prices.currencySymbol+state.item.prices.price}/' +
+                                  '${state.item.prices.currencySymbol + state.item.prices.price}/' +
                                       AppLocalizations.t(context, 'bundle'),
                                   style: TextStyle(
                                     fontSize: 14,
@@ -183,8 +183,8 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                               SizedBox(width: 5),
                               Text(
                                 '${state.item.averageRating} ' +
-                                    AppLocalizations.t(context, 'point')
-                                    +'(${state.item.reviewCount})',
+                                    AppLocalizations.t(context, 'point') +
+                                    '(${state.item.reviewCount})',
                                 style: TextStyle(
                                     color: AppColor.black272833,
                                     fontSize: 12,
@@ -192,24 +192,27 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 15),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    color: AppColor.black70_20per,
-                                  )),
-                              child: Text(
-                                categories.isNotEmpty ? categories[0].name : '',
-                                style: TextStyle(
-                                  fontFamily: AppFont.fAvenir,
+                          if (categories.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 15),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: AppColor.black70_20per,
+                                    )),
+                                child: Text(
+                                  categories.isNotEmpty
+                                      ? categories[0].name
+                                      : '',
+                                  style: TextStyle(
+                                    fontFamily: AppFont.fAvenir,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
                           Html(
                             data: state.item.description,
                             style: {
@@ -222,9 +225,7 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          counterProduct(
-                            state: state,
-                          ),
+                          counter(state),
                           SizedBox(
                             height: 10,
                           ),
@@ -292,9 +293,10 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                                       GestureDetector(
                                         onTap: () {
                                           AppBloc.bagItemBloc.add(AddBagItem(
-                                              product_id: state.item.id,
-                                              quantity:
-                                                  counterProduct().quantity));
+                                            product_id: state.item.id,
+                                            quantity: quantity,
+                                          ));
+                                          Navigator.pushNamedAndRemoveUntil(context, AppRoute.bag, (route) => false);
                                         },
                                         child: Text(
                                           AppLocalizations.t(
@@ -410,6 +412,90 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
           return current is ProductGetOneSuccess;
         },
       ),
+    );
+  }
+
+  Row counter(ProductGetOneSuccess state) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                if (quantity != 1)
+                  setState(() {
+                    quantity--;
+                  });
+              },
+              child: Container(
+                padding: EdgeInsets.all(9),
+                child: quantity == 1
+                    ? Icon(
+                        AppIcon.icon_del,
+                        color: AppColor.greenMain,
+                        size: 16,
+                      )
+                    : Icon(
+                        AppIcon.remove,
+                        color: AppColor.greenMain,
+                        size: 16,
+                      ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                  border: Border.all(
+                    color: AppColor.greenMain,
+                    width: 2,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              width: 100,
+              child: Text(
+                quantity < 10 ? '0' + quantity.toString() : quantity.toString(),
+                style: TextStyle(fontSize: 20, fontWeight: AppFont.wSemiBold),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  quantity++;
+                });
+              },
+              child: Container(
+                padding: EdgeInsets.all(9),
+                child: Icon(
+                  AppIcon.icon_plus,
+                  color: AppColor.greenMain,
+                  size: 16,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                  border: Border.all(
+                    color: AppColor.greenMain,
+                    width: 2,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          child: Text(
+            '\$' + (int.parse(state.item.prices.price) * quantity).toString(),
+            style: TextStyle(
+              fontSize: 31,
+              fontWeight: AppFont.wSuperBold,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -538,11 +624,12 @@ class review extends StatelessWidget {
   }
 }
 
+/*
 class counterProduct extends StatefulWidget {
   var state;
   int quantity;
 
-  counterProduct({Key key, this.quantity = 1, this.state}) : super(key: key);
+  counterProduct({Key key, this.quantity, this.state}) : super(key: key);
 
   @override
   _counterProduct createState() => _counterProduct();
@@ -629,7 +716,8 @@ class _counterProduct extends State<counterProduct> {
               Container(
                 child: Text(
                   '\$' +
-                      (int.parse(widget.state.item.prices.price) * widget.quantity)
+                      (int.parse(widget.state.item.prices.price) *
+                              widget.quantity)
                           .toString(),
                   style: TextStyle(
                     fontSize: 31,
@@ -644,3 +732,4 @@ class _counterProduct extends State<counterProduct> {
     );
   }
 }
+*/
