@@ -19,9 +19,8 @@ class AppRoute {
   static const String setting = '/setting';
   static const String login = '/login';
   static const String register = '/register';
-  static const String sms = '/sms';
   static const String forgot = '/forgot';
-  static const String checkmail = '/checkmail';
+  static const String checkMail = '/checkmail';
   static const String purchaseHistory = '/purchaseHistory';
   static const String purchaseDetail = '/purchaseDetail';
   static const String coupon = '/coupon';
@@ -41,6 +40,15 @@ class AppRoute {
     AppRoute.setting,
     AppRoute.search,
     AppRoute.bag,
+    AppRoute.login,
+  ];
+
+  static const List<String> loginRoutes = [
+    AppRoute.checkMail,
+    AppRoute.email,
+    AppRoute.forgot,
+    AppRoute.register,
+    AppRoute.resetPass,
   ];
 
   Route<dynamic> generateRoute(RouteSettings settings) {
@@ -162,16 +170,6 @@ class AppRoute {
           },
           settings: settings,
         );
-      case AppRoute.sms:
-        return MaterialPageRoute(
-          builder: (context) {
-            Map arg = settings.arguments;
-            return SMSScreen(
-              phone: arg['phone'],
-            );
-          },
-          settings: settings,
-        );
       case AppRoute.forgot:
         return MaterialPageRoute(
           builder: (context) {
@@ -179,7 +177,7 @@ class AppRoute {
           },
           settings: settings,
         );
-      case AppRoute.checkmail:
+      case AppRoute.checkMail:
         return MaterialPageRoute(
           builder: (context) {
             return CheckMailScreen();

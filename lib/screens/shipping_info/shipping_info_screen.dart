@@ -390,7 +390,7 @@ class headerShip extends StatelessWidget with PreferredSizeWidget {
                   size: 28,
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoute.setting);
+                  Navigator.pop(context);
                 }),
             Text(
               AppLocalizations.t(context, 'deliveryInfo'),

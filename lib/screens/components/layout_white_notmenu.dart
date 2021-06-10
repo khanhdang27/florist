@@ -15,7 +15,9 @@ class LayoutWhiteNotMenu extends StatelessWidget {
     String currentRoute = ModalRoute.of(context).settings.name;
     return WillPopScope(
       onWillPop: () async {
-        if (!AppRoute.mainRoutes.contains(currentRoute)) {
+        if (AppRoute.loginRoutes.contains(currentRoute)) {
+          return true;
+        } else if (!AppRoute.mainRoutes.contains(currentRoute)) {
           Navigator.pushReplacementNamed(context, AppRoute.home);
         } else {
           BackDialog.showMyDialog(context);

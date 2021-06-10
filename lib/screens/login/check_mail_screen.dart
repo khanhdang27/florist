@@ -43,7 +43,7 @@ class CheckMailScreen extends StatelessWidget {
           ),
           GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, AppRoute.checkmail);
+              Navigator.pushNamed(context, AppRoute.checkMail);
             },
             child: Container(
               alignment: Alignment.center,

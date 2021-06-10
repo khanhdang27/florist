@@ -177,7 +177,7 @@ class LoginScreenState extends State<LoginScreen> {
                   'password': _passwordController.text,
                   'remember_me': _isRembemerMe,
                 };
-               /* Map creds = {
+                /* Map creds = {
                   'email': _emailOrPhoneController.text,
                   'phone': _emailOrPhoneController.text,
                   'pass': _passwordController.text,
@@ -188,18 +188,16 @@ class LoginScreenState extends State<LoginScreen> {
                   var response = Provider.of<Auth>(context, listen: false)
                       .login(creds: creds);
                   response.then((value) {
-                        if (value != null)
-                          {
-                            AppBloc.memberBloc.add(MemberGetOne());
-                            Navigator.pushNamed(context, AppRoute.home);
-                          }
-                        else
-                          {
-                            Fluttertoast.showToast(
-                                msg: AppLocalizations.t(context, 'loginFailed'),
-                                timeInSecForIosWeb: 2000);
-                          }
-                      });
+                    if (value != null) {
+                      AppBloc.memberBloc.add(MemberGetOne());
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AppRoute.home, (route) => false);
+                    } else {
+                      Fluttertoast.showToast(
+                          msg: AppLocalizations.t(context, 'loginFailed'),
+                          timeInSecForIosWeb: 2000);
+                    }
+                  });
                 }
               },
               child: Container(
@@ -307,7 +305,8 @@ class LoginScreenState extends State<LoginScreen> {
           Provider.of<Auth>(context, listen: false).loginExternal(creds: creds);
       response.then((value) {
         if (value != null) {
-          Navigator.pushNamed(context, AppRoute.home);
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRoute.home, (route) => false);
         } else {
           Fluttertoast.showToast(
               msg: AppLocalizations.t(context, 'loginFailed'),
@@ -339,7 +338,10 @@ class LoginScreenState extends State<LoginScreen> {
                 .loginExternal(creds: creds);
             response.then((value) => {
                   if (value != null)
-                    {Navigator.pushNamed(context, AppRoute.home)}
+                    {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AppRoute.home, (route) => false)
+                    }
                   else
                     {
                       Fluttertoast.showToast(

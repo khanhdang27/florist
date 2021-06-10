@@ -22,7 +22,7 @@ class ForgotPassScreen extends StatelessWidget {
                 ),
                 color: AppColor.blackMain,
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoute.login);
+                  Navigator.pop(context);
                 },
               ),
             ],

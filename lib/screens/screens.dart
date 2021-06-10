@@ -17,7 +17,6 @@ export 'login/check_mail_screen.dart';
 export 'login/forgot_pass_screen.dart';
 export 'login/login_screen.dart';
 export 'login/register_screen.dart';
-export 'login/sms_screen.dart';
 export 'login/email_screen.dart';
 export 'login/reset_pass_screen.dart';
 export 'purchase/purchase_detail_screen.dart';

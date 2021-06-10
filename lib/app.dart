@@ -55,7 +55,8 @@ class _AppState extends State<App> {
           debugShowCheckedModeBanner: false,
           title: 'James Wong Florist',
           theme: ThemeData(fontFamily: AppFont.fPingFangSC),
-          home: token != '' && rememberMe? HomeScreen() : LoginScreen(),
+
+          initialRoute: token != '' && rememberMe? AppRoute.home: AppRoute.login,
           onGenerateRoute: AppRoute().generateRoute,
           locale: _locale,
           localizationsDelegates: [

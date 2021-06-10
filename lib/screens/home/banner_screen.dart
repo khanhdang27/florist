@@ -22,7 +22,8 @@ class _BannerScreenState extends State<BannerScreen> {
     return Layout(
         header: BannerHeaderBar(
           press: () {
-            Navigator.pushNamed(context, AppRoute.home);
+            AppBloc.bannerBloc.add(BannerGetAll());
+            Navigator.pop(context);
           },
         ),
         child: Column(
@@ -41,10 +42,10 @@ class _BannerScreenState extends State<BannerScreen> {
                 }
                 return Center(child: Circular());
               },
-              bloc: AppBloc.bannerBloc,
               buildWhen: (previous, current) {
                 return current is BannerGetOneSuccess;
               },
+              bloc: AppBloc.bannerBloc,
             ),
             BlocBuilder(
               builder: (context, state) {
@@ -75,9 +76,9 @@ class _BannerScreenState extends State<BannerScreen> {
                 return Center(child: Circular());
               },
               bloc: AppBloc.productBloc,
-              /*buildWhen: (previous, current) {
+              buildWhen: (previous, current) {
                 return current is ProductGetOfCateSuccess;
-              },*/
+              },
             ),
             SizedBox(height: 100),
           ],
@@ -113,7 +114,9 @@ class _Banner extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  image: NetworkImage(image),
+                  image: image == null
+                      ? AssetImage(AppAsset.bong2)
+                      : NetworkImage(image),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -164,7 +167,7 @@ class _Banner extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  AppBloc.productBloc.add(ProductReset());
+                  //AppBloc.productBloc.add(ProductReset());
                   Navigator.pushNamed(context, AppRoute.filter,
                       arguments: {'categoryId': id});
                 },

@@ -80,7 +80,7 @@ class SettingScreenState extends State<SettingScreen> {
                     Column(
                       children: [
                         Text(
-                         // '${state.item.point ?? 0}',
+                          // '${state.item.point ?? 0}',
                           '0',
                           style: TextStyle(
                               fontFamily: AppFont.fAvenir,
@@ -223,7 +223,7 @@ class SettingScreenState extends State<SettingScreen> {
                               ),
                             ),
                             Text(
-                             // '${state.item.point ?? 0}',
+                              // '${state.item.point ?? 0}',
                               '0',
                               style: TextStyle(
                                 fontSize: 16,
@@ -370,8 +370,8 @@ class SettingScreenState extends State<SettingScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          AppBloc.shippingBloc.add(
-                              ShippingGetOne(Id: state.item.id ));
+                          AppBloc.shippingBloc
+                              .add(ShippingGetOne(Id: state.item.id));
                           Navigator.pushNamed(context, AppRoute.shippingInfo);
                         },
                         child: Container(
@@ -462,7 +462,8 @@ class SettingScreenState extends State<SettingScreen> {
                           prefs.remove('token');
                           FacebookAuth.instance.logOut().then((value) {});
                           _googleSignIn.signOut();
-                          Navigator.pushNamed(context, AppRoute.login);
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, AppRoute.login, (route) => false);
                         },
                         child: Container(
                           padding: EdgeInsets.only(
@@ -496,7 +497,9 @@ class SettingScreenState extends State<SettingScreen> {
               ],
             );
           }
-          return Center(child: Circular(),);
+          return Center(
+            child: Circular(),
+          );
           /*return Center(
             child: FloatingActionButton(
               child: Text('Logout'),

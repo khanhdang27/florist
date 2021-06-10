@@ -120,7 +120,7 @@ class ResetPassScreenState extends State<ResetPassScreen> {
               onTap: () {
                 if (_formKey.currentState.validate()) {
                   AppBloc.memberBloc.add(ResetPass(pass: pass,id: widget.id));
-                  Navigator.pushNamed(context, AppRoute.login);
+                  Navigator.pushReplacementNamed(context, AppRoute.login);
                 }
               },
               child: Container(

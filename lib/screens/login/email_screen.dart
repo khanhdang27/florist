@@ -11,7 +11,6 @@ import 'dart:async';
 class EmailScreen extends StatefulWidget {
   String email;
 
-
   EmailScreen({this.email}) {
     AppBloc.memberBloc.add(ForgotPass(email: email));
   }
@@ -50,7 +49,7 @@ class EmailScreenState extends State<EmailScreen> {
                   ),
                   color: AppColor.blackMain,
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoute.login);
+                    Navigator.pop(context);
                   },
                 ),
               ],
