@@ -33,7 +33,7 @@ class _counterBag extends State<counterBag> {
                     widget.quantity--;
                   });
                   if (_debounce?.isActive ?? false) _debounce.cancel();
-                  _debounce = Timer(const Duration(milliseconds: 1000), () {
+                  _debounce = Timer(const Duration(milliseconds: 800), () {
                     AppBloc.bagItemBloc.add(BagChangeQuantity(key: widget.key_item, quantity: widget.quantity));
                   });
                 } else {
@@ -84,7 +84,7 @@ class _counterBag extends State<counterBag> {
                   widget.quantity++;
                 });
                 if (_debounce?.isActive ?? false) _debounce.cancel();
-                _debounce = Timer(const Duration(milliseconds: 1000), () {
+                _debounce = Timer(const Duration(milliseconds: 800), () {
                   AppBloc.bagItemBloc.add(BagChangeQuantity(key: widget.key_item, quantity: widget.quantity));
                 });
               },

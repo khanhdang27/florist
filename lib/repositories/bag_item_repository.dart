@@ -7,7 +7,6 @@ class BagItemRepository extends Repository {
     await httpManager.post(
         url: 'wp-json/wc/store/cart/add-item',
         data: {'id': product_id, 'quantity': quantity});
-    AppBloc.bagBloc.add(BagGetOne());
     return 1;
   }
 
@@ -20,15 +19,19 @@ class BagItemRepository extends Repository {
     return 1;
   }
 
-  Future<int> bagChangeQuantity({String key, int quantity}) async {
+  Future<Map> bagChangeQuantity({String key, int quantity}) async {
     var response =
         await httpManager.post(url: 'wp-json/wc/store/cart/update-item', data: {
       'key': key,
       'quantity': quantity,
     });
-    AppBloc.bagBloc.add(BagGetOne());
+  //  AppBloc.bagBloc.add(BagGetOne());
     String total = response['totals']['total_price'] ?? '0';
-    return int.parse(total);
+    Map results = {
+      'bag': Bag.fromJson(response),
+      'total': int.parse(total),
+    };
+    return results;
   }
 
   Future<Map> bagDeleteItem({String key}) async {

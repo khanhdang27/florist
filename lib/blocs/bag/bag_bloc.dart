@@ -34,7 +34,7 @@ class BagBloc extends Bloc<BagEvent, BagState> {
           return element.key == event.key;
         });
         yield BagGetOneSuccess(
-          bag: currentState.bag,
+          bag: event.bag,
           total: event.total,
           diff: event.key,
         );

@@ -12,9 +12,10 @@ class AddAllBagItemSuccess extends BagItemState{}
 class AddAllBagItemFailed extends BagItemState{}
 
 class BagChangeQuantitySuccess extends BagItemState{
+  final Bag bag;
   final int total;
 
-  BagChangeQuantitySuccess({this.total});
+  BagChangeQuantitySuccess({this.bag, this.total});
 }
 class BagChangeQuantityFailed extends BagItemState{}
 

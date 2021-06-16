@@ -7,9 +7,10 @@ class BagGetOne extends BagEvent {}
 
 class BagDelete extends BagEvent {
   final String key;
+  final Bag bag;
   final int total;
 
-  BagDelete({this.key, this.total});
+  BagDelete({this.key, this.bag, this.total});
 }
 class UpdateBag extends BagEvent {
   final int id;

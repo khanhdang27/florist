@@ -51,107 +51,28 @@ class BottomMenu extends StatelessWidget {
                     title: 'shoppingBag'),
               ),
               BlocBuilder(
-                bloc: AppBloc.bagBloc,
-                builder: (context, state) {
-                  if (state is BagGetOneSuccess) {
-                    return num(context, state.bag.itemsCount);
-                  }
-                  return num(context, 0);
+                builder: (context, stateBag) {
+                  return BlocBuilder(
+                    builder: (context, stateBagItem) {
+                      if (stateBag is BagGetOneSuccess) {
+                        if (stateBagItem is BagChangeQuantitySuccess) {
+                          return num(context, stateBagItem.bag.itemsCount);
+                        }
+                        return num(context, stateBag.bag.itemsCount);
+                      }
+                      return num(context, 0);
+                    },
+                    bloc: AppBloc.bagItemBloc,
+                  );
                 },
+                bloc: AppBloc.bagBloc,
               ),
             ],
           ),
-
-          //    _buildIconBtn(Icons.list_sharp, AppRoute.category),
-          //   _buildIconBtn(Icons.favorite, AppRoute.favorite),
-          /*    BlocBuilder(
-            bloc: AppBloc.favoriteBloc,
-            builder: (context, state) {
-              if (state is FavoriteFetchSuccess && state.numOf > 0) {
-                return Stack(
-                  alignment: Alignment.topRight,
-                  children: _cart(state.numOf),
-                );
-              }
-              return _cartBtn();
-            },
-          ),*/
-          //    _buildIconBtn(Icons.person, AppRoute.user),
         ],
       ),
     );
   }
-
-  // List<Widget> _cart(int numOf) {
-  //   List<Widget> cart = [
-  //     _cartBtn(),
-  //     Container(
-  //       padding: EdgeInsets.all(5),
-  //       decoration: BoxDecoration(
-  //         color: Colors.redAccent,
-  //         shape: BoxShape.circle,
-  //       ),
-  //       child: Text(
-  //         '$numOf',
-  //         style: TextStyle(color: Colors.white, fontSize: 12),
-  //       ),
-  //     ),
-  //   ];
-  //   return cart;
-  // }
-  //
-  // Widget _cartBtn() {
-  //     return _buildIconBtn(Icons.shopping_cart_outlined, AppRoute.cart);
-  // }
-
-  Widget _buildIconBtn(AppIcon icon, String path) {
-    /*  return BlocBuilder(
-      bloc: AppBloc.authBloc,
-      builder: (context, state) {
-        String defaultPath = AppRoute.login;
-        if (state is AuthSuccess) {
-          defaultPath = path;
-        }
-        return IconButton(
-          icon: Icon(icon, color: Colors.white),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, defaultPath);
-          },
-        );
-      },
-    );*/
-  }
-
-  // Widget _buildBtn(context, path, icon) {
-  //   /*  return BlocBuilder(
-  //     bloc: AppBloc.authBloc,
-  //     builder: (context, state) {
-  //       String defaultPath = AppRoute.login;
-  //       if (state is AuthSuccess) {
-  //         defaultPath = AppRoute.home;
-  //       }*/
-  //   String currentRoute = ModalRoute.of(context).settings.name;
-  //   return GestureDetector(
-  //     child: Column(
-  //       children: [
-  //         Container(
-  //           height: 30,
-  //           width: 30,
-  //           child: Icon(
-  //             icon,
-  //             color: currentRoute == path ? AppColor.greenMain : AppColor.black60per,
-  //           ),
-  //         ),
-  //         Text(title),
-  //       ],
-  //     ),
-  //     onTap: () {
-  //       Navigator.pushReplacementNamed(context, path);
-  //     },
-  //   );
-  //   /*   },
-  //   );*/
-  // }
 
   Widget num(context, num) {
     return GestureDetector(

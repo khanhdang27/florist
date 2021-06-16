@@ -38,7 +38,11 @@ class HTTPManager {
       );
       return response.data;
     } on DioError catch (error) {
-      throw error;
+      if (error.response.statusCode == 302) {
+        print(error.message);
+      } else {
+        throw error;
+      }
     } catch (error) {
       throw error;
     }
@@ -75,7 +79,7 @@ class HTTPManager {
         url,
         queryParameters: params,
         options: options,
-      );;
+      );
       return response.data;
     } on DioError catch (error) {
       throw error;

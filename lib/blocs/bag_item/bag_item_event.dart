@@ -3,6 +3,8 @@ part of 'bag_item_bloc.dart';
 @immutable
 abstract class BagItemEvent {}
 
+class ResetBagItem extends BagItemEvent{}
+
 class AddBagItem extends BagItemEvent {
   final int product_id;
   final int quantity;

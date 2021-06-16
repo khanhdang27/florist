@@ -22,8 +22,8 @@ class BagItemBloc extends Bloc<BagItemEvent, BagItemState> {
       int stt = await bagItemRepository.addBagItem(
           product_id: event.product_id,
           quantity: event.quantity);
-      if (stt == 1) {
-        yield AddBagItemSuccess();
+      if (true) {
+        AppBloc.bagBloc.add(BagGetOne());
       } else {
         yield AddBagItemFailed();
       }
@@ -41,11 +41,12 @@ class BagItemBloc extends Bloc<BagItemEvent, BagItemState> {
     }
 
     if (event is BagChangeQuantity) {
-      int total = await bagItemRepository.bagChangeQuantity(
+      Map result = await bagItemRepository.bagChangeQuantity(
           key: event.key, quantity: event.quantity);
-      if (total != null) {
+      if (result != null) {
         yield BagChangeQuantitySuccess(
-          total: total,
+          bag: result['bag'],
+          total: result['total'],
         );
       } else {
         yield BagChangeQuantityFailed();
@@ -53,11 +54,12 @@ class BagItemBloc extends Bloc<BagItemEvent, BagItemState> {
     }
 
     if (event is BagDeleteItem) {
-      Map bag = await bagItemRepository.bagDeleteItem(
+      Map result = await bagItemRepository.bagDeleteItem(
           key: event.key); //item con lai, total
       BagState bagState = AppBloc.bagBloc.state;
       if (bagState is BagGetOneSuccess) {
-        AppBloc.bagBloc.add(BagDelete(key: event.key, total: bag['total']));
+        AppBloc.bagBloc.add(BagDelete(key: event.key, bag: result['bag'], total: result['total']));
+        yield BagDeleteItemSuccess();
       }
     }
   }
