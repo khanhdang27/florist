@@ -19,6 +19,7 @@ class LoginScreenState extends State<LoginScreen> {
   TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isRembemerMe = false;
+  bool _isObscure = true;
 
   @override
   void initState() {
@@ -118,7 +119,7 @@ class LoginScreenState extends State<LoginScreen> {
                   }
                   return null;
                 },
-                obscureText: true,
+                obscureText: _isObscure,
                 decoration: InputDecoration(
                   hintText: AppLocalizations.t(context, 'pass'),
                   hintStyle: TextStyle(
@@ -126,7 +127,17 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                   border: InputBorder.none,
                   errorBorder: InputBorder.none,
-                  contentPadding: EdgeInsets.only(left: 15),
+                  contentPadding: EdgeInsets.only(left: 15, top: 15),
+                  suffixIcon: IconButton(
+                      icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off,
+                      color: AppColor.greenMain,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      }),
                 ),
               ),
             ),

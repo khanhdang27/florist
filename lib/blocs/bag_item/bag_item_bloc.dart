@@ -22,7 +22,7 @@ class BagItemBloc extends Bloc<BagItemEvent, BagItemState> {
       int stt = await bagItemRepository.addBagItem(
           product_id: event.product_id,
           quantity: event.quantity);
-      if (true) {
+      if (stt == 1 ) {
         AppBloc.bagBloc.add(BagGetOne());
       } else {
         yield AddBagItemFailed();

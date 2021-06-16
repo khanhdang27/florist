@@ -7,7 +7,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:florist/blocs/blocs.dart';
 import 'package:florist/configs/configs.dart';
 import 'package:florist/library/shared_preferences.dart';
-import 'package:florist/screens/screens.dart';
 
 class App extends StatefulWidget {
 
