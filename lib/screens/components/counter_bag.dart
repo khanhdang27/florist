@@ -5,19 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:florist/blocs/blocs.dart';
 import 'package:florist/configs/configs.dart';
 
-class counterBag extends StatefulWidget {
+// ignore: must_be_immutable
+class CounterBag extends StatefulWidget {
   int quantity;
   int id;
-  String key_item;
+  String keyItem;
 
-  counterBag({Key key, this.quantity = 1, this.id, this.key_item})
+  CounterBag({Key key, this.quantity = 1, this.id, this.keyItem})
       : super(key: key);
 
   @override
-  _counterBag createState() => _counterBag();
+  _CounterBag createState() => _CounterBag();
 }
 
-class _counterBag extends State<counterBag> {
+class _CounterBag extends State<CounterBag> {
   Timer _debounce;
 
   @override
@@ -34,13 +35,13 @@ class _counterBag extends State<counterBag> {
                   });
                   if (_debounce?.isActive ?? false) _debounce.cancel();
                   _debounce = Timer(const Duration(milliseconds: 800), () {
-                    AppBloc.bagItemBloc.add(BagChangeQuantity(key: widget.key_item, quantity: widget.quantity));
+                    AppBloc.bagItemBloc.add(BagChangeQuantity(key: widget.keyItem, quantity: widget.quantity));
                   });
                 } else {
                   if (_debounce?.isActive ?? false) _debounce.cancel();
                   _debounce = Timer(const Duration(milliseconds: 500), () {
                     AppBloc.bagItemBloc
-                        .add(BagDeleteItem(key: widget.key_item));
+                        .add(BagDeleteItem(key: widget.keyItem));
                   });
                 }
               },
@@ -85,7 +86,7 @@ class _counterBag extends State<counterBag> {
                 });
                 if (_debounce?.isActive ?? false) _debounce.cancel();
                 _debounce = Timer(const Duration(milliseconds: 800), () {
-                  AppBloc.bagItemBloc.add(BagChangeQuantity(key: widget.key_item, quantity: widget.quantity));
+                  AppBloc.bagItemBloc.add(BagChangeQuantity(key: widget.keyItem, quantity: widget.quantity));
                 });
               },
               child: Container(

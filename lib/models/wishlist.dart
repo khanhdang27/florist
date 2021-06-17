@@ -25,7 +25,7 @@ class Wishlist {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     if (json['wish_list_item'] != null) {
-      wishListItem = new List<WishlistItem>();
+      wishListItem = [];
       json['wish_list_item'].forEach((v) {
         wishListItem.add(new WishlistItem.fromJson(v));
       });

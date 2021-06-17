@@ -4,13 +4,13 @@ part of 'coupon_member_bloc.dart';
 abstract class CouponMemberEvent {}
 
 class CouponMemberAdd extends CouponMemberEvent {
-  final int member_id;
-  final int coupon_id;
+  final int memberId;
+  final int couponId;
 
-  CouponMemberAdd({this.member_id, this.coupon_id,});
+  CouponMemberAdd({this.memberId, this.couponId,});
 }
 class CouponMemberGetAll extends CouponMemberEvent {
-  final int member_id;
+  final int memberId;
 
-  CouponMemberGetAll({this.member_id});
+  CouponMemberGetAll({this.memberId});
 }

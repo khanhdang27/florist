@@ -1,5 +1,4 @@
 import 'package:florist/blocs/blocs.dart';
-import 'package:florist/library/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:florist/configs/configs.dart';
 
@@ -128,7 +127,7 @@ class _ProductWidget extends State<ProductWidget> {
                                     GestureDetector(
                                       onTap: () {
                                         AppBloc.bagItemBloc.add(AddBagItem(
-                                            product_id: widget.id,
+                                            productId: widget.id,
                                             quantity: 1));
                                         // Navigator.pushReplacementNamed(
                                         //     context, AppRoute.bag);

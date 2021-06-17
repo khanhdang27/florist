@@ -7,10 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 
 class FilterScreen extends StatefulWidget {
-  int categoryId;
-  bool isBannerScreen;
+  final int categoryId;
 
-  FilterScreen({this.categoryId, this.isBannerScreen});
+  FilterScreen({this.categoryId});
 
   @override
   _FilterScreenState createState() => _FilterScreenState();
@@ -24,7 +23,7 @@ class _FilterScreenState extends State<FilterScreen> {
   @override
   Widget build(BuildContext context) {
     return LayoutWhite(
-        header: headerFilter(),
+        header: HeaderFilter(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -68,7 +67,7 @@ class _FilterScreenState extends State<FilterScreen> {
             SizedBox(
               height: 20,
             ),
-            RangeCustom(context),
+            rangeCustom(context),
             SizedBox(
               height: 50,
             ),
@@ -86,7 +85,7 @@ class _FilterScreenState extends State<FilterScreen> {
                         ? AppRoute.banner
                         : AppRoute.productList);*/
               },
-              child: _builtBtn(
+              child: _BuiltBtn(
                   btnColor: AppColor.greenMain,
                   contColor: AppColor.whiteMain,
                   content: 'perform'),
@@ -97,7 +96,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   sort = '';
                 });
               },
-              child: _builtBtn(
+              child: _BuiltBtn(
                   btnColor: AppColor.black7C16,
                   contColor: AppColor.black7C,
                   content: 'empty'),
@@ -228,7 +227,7 @@ class _FilterScreenState extends State<FilterScreen> {
     );
   }
 
-  Widget RangeCustom(context) {
+  Widget rangeCustom(context) {
     return Container(
         margin: EdgeInsets.only(top: 50, left: 20, right: 20),
         alignment: Alignment.centerLeft,
@@ -319,12 +318,12 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 }
 
-class _builtBtn extends StatelessWidget {
+class _BuiltBtn extends StatelessWidget {
   final Color btnColor;
   final Color contColor;
   final String content;
 
-  const _builtBtn({Key key, this.btnColor, this.contColor, this.content})
+  const _BuiltBtn({Key key, this.btnColor, this.contColor, this.content})
       : super(key: key);
 
   @override
@@ -352,7 +351,7 @@ class _builtBtn extends StatelessWidget {
   }
 }
 
-class headerFilter extends StatelessWidget with PreferredSizeWidget {
+class HeaderFilter extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 

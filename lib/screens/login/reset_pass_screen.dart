@@ -1,6 +1,5 @@
 import 'package:florist/blocs/blocs.dart';
 import 'package:florist/configs/configs.dart';
-import 'package:florist/library/shared_preferences.dart';
 import 'package:florist/screens/components/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

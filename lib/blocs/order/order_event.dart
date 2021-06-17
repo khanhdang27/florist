@@ -13,9 +13,9 @@ class OrderGetOne extends OrderEvent {
   OrderGetOne({this.orderId});
 }
 class OrderAdd extends OrderEvent {
-  final int bag_id;
+  final int bagId;
   final int subtotal;
   final int total;
 
-  OrderAdd({this.bag_id, this.subtotal, this.total });
+  OrderAdd({this.bagId, this.subtotal, this.total });
 }

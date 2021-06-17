@@ -5,8 +5,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AppDb {
-  static final String DATABASE_NAME = 'florist.db';
-  static final String TABLE_WISHLIST = 'wishlist';
+  static final String databaseName = 'florist.db';
+  static final String tableWishlist = 'wishlist';
 
   AppDb._();
 
@@ -15,7 +15,7 @@ class AppDb {
 
   Future<Database> setupDatabase() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, DATABASE_NAME);
+    final path = join(documentsDirectory.path, databaseName);
     db = await openDatabase(
       path,
       version: 1,
@@ -27,7 +27,7 @@ class AppDb {
 
   Future<void> clearDatabase() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, DATABASE_NAME);
+    final path = join(documentsDirectory.path, databaseName);
     await db.close();
     await deleteDatabase(path);
     await setupDatabase();
@@ -35,7 +35,7 @@ class AppDb {
 
   Future<void> onCreate(Database database, int version) async {
     await database.execute(
-      "CREATE TABLE $TABLE_WISHLIST (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, product_id INTEGER, quantity INTEGER)",
+      "CREATE TABLE $tableWishlist (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, product_id INTEGER, quantity INTEGER)",
     );
   }
 
@@ -47,7 +47,7 @@ class AppDb {
 
   Future<int> addItemWL({int productId, int quantity}) async {
     final db = await database;
-    int id = await db.insert(TABLE_WISHLIST, {
+    int id = await db.insert(tableWishlist, {
       'email': SharedPrefs.getEmail(),
       'product_id': productId,
       'quantity': quantity
@@ -57,11 +57,11 @@ class AppDb {
 
   Future<List<int>> getWishlist() async {
     final db = await database;
-    var list = await db.query(TABLE_WISHLIST,
+    var list = await db.query(tableWishlist,
         columns: ['product_id'],
         where: 'email = ?',
         whereArgs: [SharedPrefs.getEmail()]);
-    List<int> listWL = List<int>();
+    List<int> listWL =[];
     list.forEach((element) {
       listWL.add(element['product_id']);
     });
@@ -70,11 +70,11 @@ class AppDb {
 
   Future<List<ProductWL>> getWishlistQuantity() async {
     final db = await database;
-    var list = await db.query(TABLE_WISHLIST,
+    var list = await db.query(tableWishlist,
         columns: ['product_id','quantity'],
         where: 'email = ?',
         whereArgs: [SharedPrefs.getEmail()]);
-    List<ProductWL> listWL = List<ProductWL>();
+    List<ProductWL> listWL = [];
     list.forEach((element) {
       ProductWL productWL = ProductWL.fromJson(element);
       listWL.add(productWL);
@@ -85,7 +85,7 @@ class AppDb {
   Future<int> updateItemWL({int productId, int quantity}) async {
     final db = await database;
     return await db.update(
-      TABLE_WISHLIST,
+      tableWishlist,
       {'quantity': quantity},
       where: "email = ? AND product_id = ?",
       whereArgs: [SharedPrefs.getEmail(), productId],
@@ -95,7 +95,7 @@ class AppDb {
   Future<int> deleteItemWL({int productId}) async {
     final db = await database;
     return await db.delete(
-      TABLE_WISHLIST,
+      tableWishlist,
       where: "email = ? AND product_id = ?",
       whereArgs: [SharedPrefs.getEmail(), productId],
     );

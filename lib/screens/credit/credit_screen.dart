@@ -1,7 +1,6 @@
 import 'package:florist/blocs/app_bloc.dart';
 import 'package:florist/blocs/blocs.dart';
 import 'package:florist/configs/configs.dart';
-import 'package:florist/library/shared_preferences.dart';
 import 'package:florist/screens/components/components.dart';
 import 'package:florist/screens/credit/header_credit.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,7 @@ class _CreditScreenState extends State<CreditScreen> {
   @override
   Widget build(BuildContext context) {
     return LayoutWhite(
-      header: headerCredit(),
+      header: HeaderCredit(),
       child: Padding(
         padding: const EdgeInsets.only(left: 40, top: 20),
         child: BlocBuilder(
@@ -125,7 +124,7 @@ class _CreditScreenState extends State<CreditScreen> {
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: AppFont.fAvenir,
-                              color: AppColor.C13636),
+                              color: AppColor.c13636),
                         ),
                       ],
                     ),

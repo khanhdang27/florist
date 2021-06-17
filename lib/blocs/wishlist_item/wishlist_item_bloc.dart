@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:florist/blocs/blocs.dart';
-import 'package:florist/configs/app_wishlist.dart';
-import 'package:florist/configs/configs.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/wishlist_item_repository.dart';
 import 'package:meta/meta.dart';
@@ -23,7 +20,7 @@ class WishlistItemBloc extends Bloc<WishlistItemEvent, WishlistItemState> {
   ) async* {
     if (event is AddWishlist) {
       int stt = await wishlistItemRepository.addWishlist(
-          product_id: event.product_id,
+          productId: event.productId,
       );
       if (stt == 1) {
         yield AddWishlistSuccess();
@@ -34,7 +31,7 @@ class WishlistItemBloc extends Bloc<WishlistItemEvent, WishlistItemState> {
 
     if (event is ChangeQuantity) {
       int total = await wishlistItemRepository.changeQuantity(
-          wishlist_item_id: event.id, quantity: event.quantity);
+          wishlistItemId: event.id, quantity: event.quantity);
       if (total != null) {
         yield ChangeQuantitySuccess(
           total: total,

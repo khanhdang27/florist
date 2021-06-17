@@ -19,13 +19,11 @@ class ShippingBloc extends Bloc<ShippingEvent, ShippingState> {
   ) async* {
     print(event);
     if (event is ShippingGetOne) {
-      Shipping shipping = await shippingRepository.getOne(Id: event.Id);
+      Shipping shipping = await shippingRepository.getOne(id: event.id);
       if (true) {
         yield ShippingGetOneSuccess(
           item: shipping,
         );
-      } else {
-        yield ShippingGetOneFailed();
       }
     }
     if (event is UpdateShipping) {

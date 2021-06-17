@@ -6,17 +6,17 @@ abstract class BagItemEvent {}
 class ResetBagItem extends BagItemEvent{}
 
 class AddBagItem extends BagItemEvent {
-  final int product_id;
+  final int productId;
   final int quantity;
 
-  AddBagItem({this.product_id, this.quantity});
+  AddBagItem({this.productId, this.quantity});
 }
 
 class AddAllBagItem extends BagItemEvent {
-  final int bag_id;
-  final int wishlist_id;
+  final int bagId;
+  final int wishlistId;
 
-  AddAllBagItem({this.bag_id, this.wishlist_id});
+  AddAllBagItem({this.bagId, this.wishlistId});
 }
 
 class BagChangeQuantity extends BagItemEvent {

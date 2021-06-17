@@ -39,7 +39,7 @@ class _ShippingInfoScreenState extends State<ShippingInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return LayoutWhite(
-      header: headerShip(),
+      header: HeaderShip(),
       child: BlocBuilder(
         builder: (context, state) {
           //print(state);
@@ -370,7 +370,7 @@ class _ShippingInfoScreenState extends State<ShippingInfoScreen> {
   }
 }
 
-class headerShip extends StatelessWidget with PreferredSizeWidget {
+class HeaderShip extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 

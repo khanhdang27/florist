@@ -1,9 +1,9 @@
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/repository.dart';
 
-class CreditRepository extends Repository{
-  Future<Credit> getOne({int Id}) async {
-    var response = await httpManager.get(url: '/api/credit/$Id');
+class CreditRepository extends Repository {
+  Future<Credit> getOne({int id}) async {
+    var response = await httpManager.get(url: '/api/credit/$id');
     var data = response;
 
     Credit results = Credit.fromJson(data);
@@ -12,7 +12,7 @@ class CreditRepository extends Repository{
 
   Future<int> updateCredit(
       {int id, String expiry, String code, String cvv}) async {
-    var response = await httpManager.put(url: '/api/credit/$id', data: {
+    await httpManager.put(url: '/api/credit/$id', data: {
       'expiry': expiry,
       'code': code,
       'cvv': cvv,

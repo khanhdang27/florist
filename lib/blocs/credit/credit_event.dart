@@ -4,9 +4,9 @@ part of 'credit_bloc.dart';
 abstract class CreditEvent {}
 
 class CreditGetOne extends CreditEvent {
-  final int Id;
+  final int id;
 
-  CreditGetOne({this.Id});
+  CreditGetOne({this.id});
 }
 
 class UpdateCredit extends CreditEvent {

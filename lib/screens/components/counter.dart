@@ -5,18 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:florist/blocs/blocs.dart';
 import 'package:florist/configs/configs.dart';
 
-class counter extends StatefulWidget {
+// ignore: must_be_immutable
+class Counter extends StatefulWidget {
   int quantity;
-  int product_id;
+  int productId;
   int id;
 
-  counter({Key key, this.quantity = 1, this.id, this.product_id}) : super(key: key);
+  Counter({Key key, this.quantity = 1, this.id, this.productId}) : super(key: key);
 
   @override
-  _counter createState() => _counter();
+  _Counter createState() => _Counter();
 }
 
-class _counter extends State<counter> {
+class _Counter extends State<Counter> {
   Timer _debounce;
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class _counter extends State<counter> {
 
                   if (_debounce?.isActive ?? false) _debounce.cancel();
                   _debounce = Timer(const Duration(milliseconds: 500), () {
-                    AppBloc.wishlistItemBloc.add(DeleteItem(id: widget.id,product_id: widget.product_id));
+                    AppBloc.wishlistItemBloc.add(DeleteItem(id: widget.id,productId: widget.productId));
                   });
                 }
               },

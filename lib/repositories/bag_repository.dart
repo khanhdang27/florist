@@ -21,7 +21,6 @@ class BagRepository extends Repository {
       'ship_address': address,
       'pay': pay,
     });
-    var data = response['id'];
     await SharedPrefs.setBagId(response['id']);
     return response['id'];
   }

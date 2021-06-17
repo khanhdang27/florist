@@ -6,10 +6,9 @@ import 'package:florist/screens/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'dart:async';
 
 class EmailScreen extends StatefulWidget {
-  String email;
+  final String email;
 
   EmailScreen({this.email}) {
     AppBloc.memberBloc.add(ForgotPass(email: email));

@@ -50,10 +50,8 @@
 //   }
 // }
 
-import 'package:flutter/material.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/repository.dart';
-import 'package:florist/screens/components/components.dart';
 
 class ProductRepository extends Repository{
 
@@ -77,8 +75,8 @@ class ProductRepository extends Repository{
     return results;
   }
 
-  Future<Product> getOne({int Id}) async {
-    var response = await httpManager.get(url: 'wp-json/wc/store/products/$Id');
+  Future<Product> getOne({int id}) async {
+    var response = await httpManager.get(url: 'wp-json/wc/store/products/$id');
     var data = response;
     Product results = Product.fromJson(data);
     return results;

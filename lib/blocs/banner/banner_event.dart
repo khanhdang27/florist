@@ -6,7 +6,7 @@ abstract class BannerEvent {}
 class BannerGetAll extends BannerEvent {}
 
 class BannerGetOne extends BannerEvent {
-  final int Id;
+  final int id;
 
-  BannerGetOne({this.Id});
+  BannerGetOne({this.id});
 }

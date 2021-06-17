@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart' as Dio;
 import 'package:florist/library/shared_preferences.dart';
 import 'package:florist/models/models.dart';
-import 'package:florist/screens/components/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'dio.dart';
 
@@ -45,6 +43,7 @@ class Auth extends ChangeNotifier {
     } catch (e) {
       print(e);
     }
+    return '';
   }
 
   Future<String> loginExternal({Map creds}) async {
@@ -52,9 +51,9 @@ class Auth extends ChangeNotifier {
     try {
       Dio.Response response = await dio().post('/login-external', data: creds);
       String token = response.data['token'];
-      int wishlist_id = response.data['wishlist_id'];
-      int bag_id = response.data['bag'];
-      Member member = Member.fromJson(response.data['member']);
+      // int wishlist_id = response.data['wishlist_id'];
+      // int bag_id = response.data['bag'];
+      // Member member = Member.fromJson(response.data['member']);
       await SharedPrefs.setToken(token);
       // await SharedPrefs.setMemberId(member.id);
       // await SharedPrefs.setWishlistId(wishlist_id);

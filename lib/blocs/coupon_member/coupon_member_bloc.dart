@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:florist/blocs/blocs.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/coupon_member_repository.dart';
 import 'package:meta/meta.dart';
@@ -18,19 +17,17 @@ class CouponMemberBloc extends Bloc<CouponMemberEvent, CouponMemberState> {
   @override
   Stream<CouponMemberState> mapEventToState(CouponMemberEvent event,) async* {
     if (event is CouponMemberGetAll) {
-      List<CouponMember> coupons = await couponMemberRepository.getAll(event.member_id);
+      List<CouponMember> coupons = await couponMemberRepository.getAll(event.memberId);
       if (true) {
         yield CouponMemberGetAllSuccess(
           items: coupons,
         );
-      } else {
-        yield CouponMemberGetAllFailed();
       }
     }
     if (event is CouponMemberAdd) {
       int stt = await couponMemberRepository.addCouponMember(
-        member_id: event.member_id,
-        coupon_id: event.coupon_id,
+        memberId: event.memberId,
+        couponId: event.couponId,
       );
       if (stt == 1) {
         yield AddCouponMemberSuccess();

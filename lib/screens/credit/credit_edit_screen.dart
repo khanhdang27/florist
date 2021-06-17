@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:florist/blocs/blocs.dart';
 import 'package:florist/configs/configs.dart';
 import 'package:florist/library/shared_preferences.dart';
@@ -48,7 +46,7 @@ class _CreditEditScreenState extends State<CreditEditScreen> {
   @override
   Widget build(BuildContext context) {
     return LayoutWhite(
-      header: headerCredit(),
+      header: HeaderCredit(),
       child: Form(
         key: _formKey,
         child: BlocBuilder(
@@ -323,7 +321,7 @@ class _CreditEditScreenState extends State<CreditEditScreen> {
                                 expiry: _expiryController.text,
                                 cvv: _cvvController.text,
                               ));
-                              AppBloc.creditBloc.add(CreditGetOne(Id: SharedPrefs.getMemberId()));
+                              AppBloc.creditBloc.add(CreditGetOne(id: SharedPrefs.getMemberId()));
                             }
                             Navigator.pop(context);
                           }

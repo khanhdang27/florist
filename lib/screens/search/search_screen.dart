@@ -82,42 +82,42 @@ bool empty = true;
               ],
             )
           ),
-          empty?nonSearch():hasSearch(),
+          empty?NonSearch():HasSearch(),
         ],
       )
     );
   }
 }
-class nonSearch extends StatelessWidget{
+class NonSearch extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        popuSearch(content: '玫瑰',type: 'popularSearch'),
-        popuSearch(content: '百合',type: 'recentSearch'),
-        popuSearch(content: '生日花',type: 'recentSearch')
+        PopSearch(content: '玫瑰',type: 'popularSearch'),
+        PopSearch(content: '百合',type: 'recentSearch'),
+        PopSearch(content: '生日花',type: 'recentSearch')
       ],
     );
   }
 }
 
-class hasSearch extends StatelessWidget{
+class HasSearch extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        searchWidget(content: '玫瑰花束',),
-        searchWidget(content: '玫瑰生日花束',),
-        searchWidget(content: '玫瑰畢業花束',),
+        SearchWidget(content: '玫瑰花束',),
+        SearchWidget(content: '玫瑰生日花束',),
+        SearchWidget(content: '玫瑰畢業花束',),
       ],
     );
   }
 }
 
-class searchWidget extends StatelessWidget{
+class SearchWidget extends StatelessWidget{
   final String content;
 
-  const searchWidget({Key key, this.content}) : super(key: key);
+  const SearchWidget({Key key, this.content}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -140,11 +140,11 @@ class searchWidget extends StatelessWidget{
   }
 }
 
-class popuSearch extends StatelessWidget{
+class PopSearch extends StatelessWidget{
   final String content;
   final String type;
 
-  const popuSearch({Key key, this.content, this.type}) : super(key: key);
+  const PopSearch({Key key, this.content, this.type}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

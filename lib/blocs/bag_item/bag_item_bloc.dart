@@ -20,7 +20,7 @@ class BagItemBloc extends Bloc<BagItemEvent, BagItemState> {
   ) async* {
     if (event is AddBagItem) {
       int stt = await bagItemRepository.addBagItem(
-          product_id: event.product_id,
+          productId: event.productId,
           quantity: event.quantity);
       if (stt == 1 ) {
         AppBloc.bagBloc.add(BagGetOne());
@@ -31,8 +31,8 @@ class BagItemBloc extends Bloc<BagItemEvent, BagItemState> {
 
     if (event is AddAllBagItem) {
       int stt = await bagItemRepository.addAllBagItem(
-          bag_id: event.bag_id,
-          wishlist_id: event.wishlist_id,);
+          bagId: event.bagId,
+          wishlistId: event.wishlistId,);
       if (stt == 1) {
         yield AddAllBagItemSuccess();
       } else {

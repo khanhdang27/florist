@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:florist/library/shared_preferences.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/repository.dart';
-import 'package:florist/screens/components/components.dart';
 
 class MemberRepository extends Repository {
   Future<Member> getOne() async {
@@ -34,8 +33,6 @@ class MemberRepository extends Repository {
     var response = await httpManager.post(url: '/api/member/forgotPass', data: {
       'email': email,
     });
-
-    var data = response;
     String code = response['code'] ?? 'error';
     int id = response['id'] ?? 0;
     Map results = {
@@ -63,8 +60,7 @@ class MemberRepository extends Repository {
   }
 
   Future<int> resetPass({int id, String pass}) async {
-    var response =
-        await httpManager.put(url: '/api/member/resetPass/$id', data: {
+    await httpManager.put(url: '/api/member/resetPass/$id', data: {
       'pass': pass,
     });
     return 1;

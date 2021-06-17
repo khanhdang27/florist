@@ -65,7 +65,7 @@ class _BannerScreenState extends State<BannerScreen> {
                           price: e.prices.currencySymbol + e.prices.price,
                         ),
                         onTap: () {
-                          AppBloc.productBloc.add(ProductGetOne(Id: e.id));
+                          AppBloc.productBloc.add(ProductGetOne(id: e.id));
                           AppBloc.reviewBloc.add(ReviewGetAll(productId: e.id));
                           Navigator.pushNamed(context, AppRoute.productDetail);
                         },

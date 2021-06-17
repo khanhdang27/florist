@@ -7,7 +7,7 @@ class WishListEmptyScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return LayoutGreenNotScroll(
-      header: headerWishlist(),
+      header: HeaderWishlist(),
       child: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

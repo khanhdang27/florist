@@ -20,8 +20,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         yield OrderGetAllSuccess(
           items: orders,
         );
-      } else {
-        yield OrderGetAllFailed();
       }
     }
 
@@ -31,14 +29,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         yield OrderGetOneSuccess(
           item: order,
         );
-      } else {
-        yield OrderGetOneFailed();
       }
     }
 
     if (event is OrderAdd) {
       int stt = await orderRepository.addOrder(
-        bag_id: event.bag_id,
+        bagId: event.bagId,
         subtotal: event.subtotal,
         total: event.total,
       );

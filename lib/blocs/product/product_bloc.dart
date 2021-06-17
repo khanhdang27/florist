@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/product_repository.dart';
@@ -26,8 +25,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         yield ProductGetRecomSuccess(
           items: products,
         );
-      } else {
-        yield ProductGetRecomFailed();
       }
     }
 
@@ -82,18 +79,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         yield ProductGetOfCateSuccess(
           items: products,
         );
-      } else {
-        yield ProductGetOfCateFailed();
       }
     }
     if (event is ProductGetOne) {
-      Product product = await productRepository.getOne(Id: event.Id);
+      Product product = await productRepository.getOne(id: event.id);
       if (true) {
         yield ProductGetOneSuccess(
           item: product,
         );
-      } else {
-        yield ProductGetOneFailed();
       }
     }
   }

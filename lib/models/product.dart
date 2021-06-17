@@ -100,29 +100,29 @@ class Product {
 
   Product(
       {this.id,
-        this.name,
-        this.parent,
-        this.type,
-        this.variation,
-        this.permalink,
-        this.sku,
-        this.shortDescription,
-        this.description,
-        this.onSale,
-        this.prices,
-        this.priceHtml,
-        this.averageRating,
-        this.reviewCount,
-        this.images,
-        this.categories,
-        this.tags,
-        this.hasOptions,
-        this.isPurchasable,
-        this.isInStock,
-        this.isOnBackorder,
-        this.soldIndividually,
-        this.quantityLimit,
-        this.addToCart});
+      this.name,
+      this.parent,
+      this.type,
+      this.variation,
+      this.permalink,
+      this.sku,
+      this.shortDescription,
+      this.description,
+      this.onSale,
+      this.prices,
+      this.priceHtml,
+      this.averageRating,
+      this.reviewCount,
+      this.images,
+      this.categories,
+      this.tags,
+      this.hasOptions,
+      this.isPurchasable,
+      this.isInStock,
+      this.isOnBackorder,
+      this.soldIndividually,
+      this.quantityLimit,
+      this.addToCart});
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -136,24 +136,24 @@ class Product {
     description = json['description'];
     onSale = json['on_sale'];
     prices =
-    json['prices'] != null ? new Prices.fromJson(json['prices']) : null;
+        json['prices'] != null ? new Prices.fromJson(json['prices']) : null;
     priceHtml = json['price_html'];
     averageRating = json['average_rating'];
     reviewCount = json['review_count'];
     if (json['images'] != null) {
-      images = new List<Images>();
+      images = [];
       json['images'].forEach((v) {
         images.add(new Images.fromJson(v));
       });
     }
     if (json['categories'] != null) {
-      categories = new List<Category>();
+      categories = [];
       json['categories'].forEach((v) {
         categories.add(new Category.fromJson(v));
       });
     }
     if (json['tags'] != null) {
-      tags = new List<Tag>();
+      tags = [];
       json['tags'].forEach((v) {
         tags.add(new Tag.fromJson(v));
       });

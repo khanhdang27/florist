@@ -18,13 +18,13 @@ class WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     return Layout(
-      header: headerWishlist(),
+      header: HeaderWishlist(),
       child: Column(
         children: [
           BlocBuilder(
             builder: (context, stateWl) {
               if (stateWl is WishlistGetOneSuccess) {
-                List<WishList> wishlist_item =
+                List<WishList> wishlistItem =
                     stateWl.item.wishListItem.map((e) {
                   return WishList(
                     name: e.product.name,
@@ -38,7 +38,7 @@ class WishListScreenState extends State<WishListScreen> {
                 }).toList();
 
                 return Column(
-                  children: wishlist_item,
+                  children: wishlistItem,
                 );
               }
               return Center(child: Circular());
@@ -109,8 +109,8 @@ class WishListScreenState extends State<WishListScreen> {
                 GestureDetector(
                   onTap: () {
                     AppBloc.bagItemBloc.add(AddAllBagItem(
-                        bag_id: SharedPrefs.getBagId(),
-                        wishlist_id: SharedPrefs.getWishlistId(),
+                        bagId: SharedPrefs.getBagId(),
+                        wishlistId: SharedPrefs.getWishlistId(),
                     ));
                     Navigator.pushReplacementNamed(context, AppRoute.bag);
                   },
@@ -230,7 +230,7 @@ class _WishList extends State<WishList> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AppBloc.productBloc.add(ProductGetOne(Id: widget.productId));
+        AppBloc.productBloc.add(ProductGetOne(id: widget.productId));
         AppBloc.reviewBloc.add(ReviewGetAll(productId: widget.productId));
         Navigator.pushNamed(context, AppRoute.productDetail);
       },
@@ -280,8 +280,8 @@ class _WishList extends State<WishList> {
                         style: TextStyle(color: AppColor.blackMain, fontSize: 16),
                       ),
                       SizedBox(height: 3),
-                      counter(
-                        product_id: widget.productId,
+                      Counter(
+                        productId: widget.productId,
                         id: widget.id,
                         quantity: widget.quantity,
                       ),
@@ -292,7 +292,7 @@ class _WishList extends State<WishList> {
                           GestureDetector(
                             onTap: () {
                               AppBloc.bagItemBloc.add(AddBagItem(
-                                  product_id: widget.productId,
+                                  productId: widget.productId,
                                   quantity: widget.quantity));
                               Navigator.pushReplacementNamed(context, AppRoute.bag);
                             },

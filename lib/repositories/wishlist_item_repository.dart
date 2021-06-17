@@ -3,34 +3,34 @@ import 'package:florist/models/models.dart';
 import 'package:florist/repositories/repository.dart';
 
 class WishlistItemRepository extends Repository {
-  Future<int> addWishlist({int product_id}) async {
+  Future<int> addWishlist({int productId}) async {
     int response;
-    if(appWishlist.appWishlistContainer.contains(product_id)){
+    if(appWishlist.appWishlistContainer.contains(productId)){
       response = await AppDb.dbLocal.deleteItemWL(
-          productId:product_id,
+          productId:productId,
       );
-      appWishlist.appWishlistContainer.remove(product_id);
+      appWishlist.appWishlistContainer.remove(productId);
     }else{
       response = await AppDb.dbLocal.addItemWL(
-          productId:product_id,
+          productId:productId,
           quantity: 1
       );
-      appWishlist.appWishlistContainer.add(product_id);
+      appWishlist.appWishlistContainer.add(productId);
     }
     return response != null ? 1 : 0;
   }
 
-  Future<int> changeQuantity({int wishlist_item_id, int quantity}) async {
+  Future<int> changeQuantity({int wishlistItemId, int quantity}) async {
     var response = await httpManager.put(
-        url: '/api/wish-list-item/$wishlist_item_id',
+        url: '/api/wish-list-item/$wishlistItemId',
         data: {'quantity': quantity});
     var total = response['total'];
     return int.parse(total);
   }
 
-  Future<Map> deleteItem({int wishlist_item_id}) async {
+  Future<Map> deleteItem({int wishlistItemId}) async {
     var response =
-        await httpManager.delete(url: '/api/wish-list-item/$wishlist_item_id');
+        await httpManager.delete(url: '/api/wish-list-item/$wishlistItemId');
     var data = response['wishList'];
     String total = response['total'] ?? '0';
     Map results = {

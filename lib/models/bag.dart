@@ -25,13 +25,13 @@ class Bag {
 
   Bag.fromJson(Map<String, dynamic> json) {
     if (json['coupons'] != null) {
-      coupons = new List<Coupon>();
+      coupons = [];
       json['coupons'].forEach((v) {
         coupons.add(new Coupon.fromJson(v));
       });
     }
     if (json['shipping_rates'] != null) {
-      shippingRates = new List<ShippingRates>();
+      shippingRates = [];
       json['shipping_rates'].forEach((v) {
         shippingRates.add(new ShippingRates.fromJson(v));
       });
@@ -40,7 +40,7 @@ class Bag {
         ? new ShippingAddress.fromJson(json['shipping_address'])
         : null;
     if (json['items'] != null) {
-      items = new List<Items>();
+      items = [];
       json['items'].forEach((v) {
         items.add(new Items.fromJson(v));
       });

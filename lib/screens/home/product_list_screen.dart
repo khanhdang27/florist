@@ -74,7 +74,7 @@ class ProductListScreen extends StatelessWidget {
                     List<Images> images = e.images;
                     return GestureDetector(
                         onTap: () {
-                          AppBloc.productBloc.add(ProductGetOne(Id: e.id));
+                          AppBloc.productBloc.add(ProductGetOne(id: e.id));
                           AppBloc.reviewBloc.add(ReviewGetAll(productId: e.id));
                           Navigator.pushNamed(context, AppRoute.productDetail);
                         },

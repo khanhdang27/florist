@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:florist/blocs/blocs.dart';
 import 'package:florist/configs/configs.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/wishlist_repository.dart';

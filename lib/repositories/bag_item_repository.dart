@@ -3,17 +3,17 @@ import 'package:florist/models/models.dart';
 import 'package:florist/repositories/repository.dart';
 
 class BagItemRepository extends Repository {
-  Future<int> addBagItem({int product_id, int quantity}) async {
+  Future<int> addBagItem({int productId, int quantity}) async {
     await httpManager.post(
         url: 'wp-json/wc/store/cart/add-item',
-        data: {'id': product_id, 'quantity': quantity});
+        data: {'id': productId, 'quantity': quantity});
     return 1;
   }
 
-  Future<int> addAllBagItem({int bag_id, int wishlist_id}) async {
-    var response = await httpManager.post(url: '/api/bag-item/storeAll', data: {
-      'bag_id': bag_id,
-      'wishlist_id': wishlist_id,
+  Future<int> addAllBagItem({int bagId, int wishlistId}) async {
+    await httpManager.post(url: '/api/bag-item/storeAll', data: {
+      'bag_id': bagId,
+      'wishlist_id': wishlistId,
     });
     AppBloc.bagBloc.add(BagGetOne());
     return 1;

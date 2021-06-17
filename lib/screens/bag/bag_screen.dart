@@ -22,27 +22,27 @@ class BagScreen extends StatefulWidget {
 class BagScreenState extends State<BagScreen> {
   int total = 0;
   int _delivery = SharedPrefs.getShippingType() ?? 1;
-  int shipping_cost = 0;
+  int shippingCost = 0;
 
   @override
   Widget build(BuildContext context) {
     if (SharedPrefs.getShippingType() == 2)
-      shipping_cost = 50;
-    else if (SharedPrefs.getShippingType() == 3) shipping_cost = 150;
+      shippingCost = 50;
+    else if (SharedPrefs.getShippingType() == 3) shippingCost = 150;
 
     return LayoutF3(
-      header: headerBag(),
+      header: HeaderBag(),
       child: Column(
         children: [
           BlocBuilder(
             builder: (context, state) {
               if (state is BagGetOneSuccess) {
-                List<BagProduct> bag_item = state.bag.items.map((e) {
+                List<BagProduct> bagItem = state.bag.items.map((e) {
                   return BagProduct(
                     name: e.name,
                     model: e.sku,
                     id: e.id,
-                    key_item: e.key,
+                    keyItem: e.key,
                     price: e.prices.currencySymbol+e.prices.price,
                     quantity: e.quantity,
                     image: e.images[0].src,
@@ -50,7 +50,7 @@ class BagScreenState extends State<BagScreen> {
                 }).toList();
 
                 return Column(
-                  children: bag_item,
+                  children: bagItem,
                 );
               }
               return Center(child: Circular());
@@ -91,7 +91,7 @@ class BagScreenState extends State<BagScreen> {
                           await SharedPrefs.setShippingType(1);
                           setState(() {
                             _delivery = T;
-                            shipping_cost = 0;
+                            shippingCost = 0;
                           });
                         },
                         title: Text(
@@ -124,7 +124,7 @@ class BagScreenState extends State<BagScreen> {
                           await SharedPrefs.setShippingType(2);
                           setState(() {
                             _delivery = T;
-                            shipping_cost = 50;
+                            shippingCost = 50;
                           });
                         },
                         title: Text(
@@ -160,7 +160,7 @@ class BagScreenState extends State<BagScreen> {
                           await SharedPrefs.setShippingType(3);
                           setState(() {
                             _delivery = T;
-                            shipping_cost = 150;
+                            shippingCost = 150;
                           });
                         },
                         title: Text(
@@ -260,7 +260,7 @@ class BagScreenState extends State<BagScreen> {
                       ),
                     ),
                     Text(
-                      '\$${shipping_cost}',
+                      '\$$shippingCost',
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: AppFont.fAvenir,
@@ -289,7 +289,7 @@ class BagScreenState extends State<BagScreen> {
                               if (stateBagItem is BagChangeQuantitySuccess) {
                                 total = stateBagItem.total;
                                 return Text(
-                                  '\$${stateBagItem.total + shipping_cost}',
+                                  '\$${stateBagItem.total + shippingCost}',
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: AppFont.wSuperBold,
@@ -298,7 +298,7 @@ class BagScreenState extends State<BagScreen> {
                               }
                               total = stateBag.total;
                               return Text(
-                                '\$${stateBag.total + shipping_cost}',
+                                '\$${stateBag.total + shippingCost}',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: AppFont.wSuperBold,
@@ -334,7 +334,7 @@ class BagScreenState extends State<BagScreen> {
                       Navigator.pushNamed(context, AppRoute.checkout,
                           arguments: {
                             'subtotal': total,
-                            'cost': shipping_cost
+                            'cost': shippingCost
                           });
                   },
                   child: Container(
@@ -371,7 +371,7 @@ class BagProduct extends StatefulWidget {
   final String model;
   final String price;
   final int quantity;
-  final String key_item;
+  final String keyItem;
 
   const BagProduct(
       {Key key,
@@ -380,7 +380,7 @@ class BagProduct extends StatefulWidget {
       this.id,
       this.price,
       this.quantity,
-      this.key_item,
+      this.keyItem,
       this.model})
       : super(key: key);
 
@@ -395,7 +395,7 @@ class _BagProduct extends State<BagProduct> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        AppBloc.productBloc.add(ProductGetOne(Id: widget.id));
+        AppBloc.productBloc.add(ProductGetOne(id: widget.id));
         AppBloc.reviewBloc.add(ReviewGetAll(productId: widget.id));
         Navigator.pushNamed(context, AppRoute.productDetail);
       },
@@ -450,8 +450,8 @@ class _BagProduct extends State<BagProduct> {
                             TextStyle(color: AppColor.blackMain, fontSize: 16),
                       ),
                       SizedBox(height: 3),
-                      counterBag(
-                        key_item: widget.key_item,
+                      CounterBag(
+                        keyItem: widget.keyItem,
                         id: widget.id,
                         quantity: widget.quantity,
                       ),
@@ -466,7 +466,7 @@ class _BagProduct extends State<BagProduct> {
   }
 }
 
-class headerBag extends StatelessWidget with PreferredSizeWidget {
+class HeaderBag extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 

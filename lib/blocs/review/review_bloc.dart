@@ -22,19 +22,17 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
         yield ReviewGetAllSuccess(
           items: reviews,
         );
-      } else {
-        yield ReviewGetAllFailed();
       }
     }
     if (event is ReviewAdd) {
       int stt = await reviewRepository.addReview(
-          member_id: event.member_id,
+          memberId: event.memberId,
           content: event.content,
-          product_id: event.product_id,
+          productId: event.productId,
       );
       if (stt == 1) {
         yield AddReviewSuccess();
-        AppBloc.reviewBloc.add(ReviewGetAll(productId: event.product_id));
+        AppBloc.reviewBloc.add(ReviewGetAll(productId: event.productId));
       } else {
         yield AddReviewFailed();
       }

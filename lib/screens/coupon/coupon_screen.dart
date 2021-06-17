@@ -3,13 +3,12 @@ import 'package:florist/library/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:florist/configs/configs.dart';
 import 'package:florist/screens/components/components.dart';
-import 'package:florist/screens/components/layout_white_not_scroll.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CouponScreen extends StatefulWidget {
 
   CouponScreen(){
-    AppBloc.couponMemberBloc.add(CouponMemberGetAll(member_id: SharedPrefs.getMemberId()));
+    AppBloc.couponMemberBloc.add(CouponMemberGetAll(memberId: SharedPrefs.getMemberId()));
   }
 
   @override
@@ -21,13 +20,13 @@ class _CouponScreenState extends State<CouponScreen> {
   @override
   Widget build(BuildContext context) {
     return LayoutWhite(
-      header: headerCoupon(),
+      header: HeaderCoupon(),
       //child: hasCoupon ? ShowCoupon() : noCoupon(),
       child: BlocBuilder(
         builder: (context, state) {
           if (state is CouponMemberGetAllSuccess) {
             if(state.items.length == 0){
-              return noCoupon();
+              return NoCoupon();
             }
             return ShowCoupon();
           }
@@ -42,7 +41,7 @@ class _CouponScreenState extends State<CouponScreen> {
   }
 }
 
-class headerCoupon extends StatelessWidget with PreferredSizeWidget{
+class HeaderCoupon extends StatelessWidget with PreferredSizeWidget{
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 
@@ -83,7 +82,7 @@ class headerCoupon extends StatelessWidget with PreferredSizeWidget{
   }
 }
 
-class noCoupon extends StatelessWidget {
+class NoCoupon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -100,7 +99,7 @@ class noCoupon extends StatelessWidget {
                 AppLocalizations.t(context, 'noCoupon'),
                 style: TextStyle(
                     fontSize: 14,
-                    color: AppColor.C4,
+                    color: AppColor.c4,
                   fontFamily: AppFont.fAvenir
                 ),
               ),
@@ -123,7 +122,7 @@ class ShowCoupon extends StatelessWidget {
                   return Column(
                     children: state.items.map((e) {
                       return GestureDetector(
-                          child: coupon(
+                          child: Coupon(
                             name: e.coupon.name,
                             image: e.coupon.image,
                             title: e.coupon.content,
@@ -146,13 +145,13 @@ class ShowCoupon extends StatelessWidget {
   }
 }
 
-class coupon extends StatelessWidget{
+class Coupon extends StatelessWidget{
   final String name;
   final String image;
   final String title;
   final String exp;
 
-  const coupon({Key key, this.name, this.image, this.title, this.exp}) : super(key: key);
+  const Coupon({Key key, this.name, this.image, this.title, this.exp}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

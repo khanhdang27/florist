@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:florist/configs/configs.dart';
 
-class headerWishlist extends StatelessWidget with PreferredSizeWidget{
+class HeaderWishlist extends StatelessWidget with PreferredSizeWidget{
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 

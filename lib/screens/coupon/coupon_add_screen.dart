@@ -35,7 +35,7 @@ class _CouponAddScreenState extends State<CouponAddScreen> {
   @override
   Widget build(BuildContext context) {
     return LayoutWhite(
-      header: headerCouponAdd(),
+      header: HeaderCouponAdd(),
       child: Column(
         children: [
           Container(
@@ -89,8 +89,8 @@ class _CouponAddScreenState extends State<CouponAddScreen> {
                     for (Coupon coupon in appCoupon.appCouponContainer) {
                       if (keyController.text.trim() == coupon.code) {
                         AppBloc.couponMemberBloc.add(CouponMemberAdd(
-                            member_id: SharedPrefs.getMemberId(),
-                            coupon_id: coupon.id));
+                            memberId: SharedPrefs.getMemberId(),
+                            couponId: coupon.id));
                         codeValid = true;
                         break;
                       } else
@@ -138,7 +138,7 @@ class _CouponAddScreenState extends State<CouponAddScreen> {
   }
 }
 
-class headerCouponAdd extends StatelessWidget with PreferredSizeWidget {
+class HeaderCouponAdd extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 

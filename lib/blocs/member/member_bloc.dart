@@ -23,8 +23,6 @@ class MemberBloc extends Bloc<MemberEvent, MemberState> {
         yield MemberGetOneSuccess(
           item: member,
         );
-      } else {
-        yield MemberGetOneFailed();
       }
     }
 

@@ -46,6 +46,7 @@ class ExistingCardsPageState extends State<ExistingCardsPage> {
         card: stripeCard
     );
     await dialog.hide();
+    // ignore: deprecated_member_use
     Scaffold.of(context).showSnackBar(
         SnackBar(
           content: Text(response.message),

@@ -1,15 +1,15 @@
 class Shipping {
-  String _firstName;
-  String _lastName;
-  String _company;
-  String _address1;
-  String _address2;
-  String _city;
-  String _postcode;
-  String _country;
-  String _state;
-  String _email;
-  String _phone;
+  String firstName;
+  String lastName;
+  String company;
+  String address1;
+  String address2;
+  String city;
+  String postcode;
+  String country;
+  String state;
+  String email;
+  String phone;
 
   Shipping(
       {String firstName,
@@ -23,69 +23,46 @@ class Shipping {
         String state,
         String email,
         String phone}) {
-    this._firstName = firstName;
-    this._lastName = lastName;
-    this._company = company;
-    this._address1 = address1;
-    this._address2 = address2;
-    this._city = city;
-    this._postcode = postcode;
-    this._country = country;
-    this._state = state;
-    this._email = email;
-    this._phone = phone;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.company = company;
+    this.address1 = address1;
+    this.address2 = address2;
+    this.city = city;
+    this.postcode = postcode;
+    this.country = country;
+    this.state = state;
+    this.email = email;
+    this.phone = phone;
   }
 
-  String get firstName => _firstName;
-  set firstName(String firstName) => _firstName = firstName;
-  String get lastName => _lastName;
-  set lastName(String lastName) => _lastName = lastName;
-  String get company => _company;
-  set company(String company) => _company = company;
-  String get address1 => _address1;
-  set address1(String address1) => _address1 = address1;
-  String get address2 => _address2;
-  set address2(String address2) => _address2 = address2;
-  String get city => _city;
-  set city(String city) => _city = city;
-  String get postcode => _postcode;
-  set postcode(String postcode) => _postcode = postcode;
-  String get country => _country;
-  set country(String country) => _country = country;
-  String get state => _state;
-  set state(String state) => _state = state;
-  String get email => _email;
-  set email(String email) => _email = email;
-  String get phone => _phone;
-  set phone(String phone) => _phone = phone;
-
   Shipping.fromJson(Map<String, dynamic> json) {
-    _firstName = json['first_name'];
-    _lastName = json['last_name'];
-    _company = json['company'];
-    _address1 = json['address_1'];
-    _address2 = json['address_2'];
-    _city = json['city'];
-    _postcode = json['postcode'];
-    _country = json['country'];
-    _state = json['state'];
-    _email = json['email'];
-    _phone = json['phone'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
+    company = json['company'];
+    address1 = json['address_1'];
+    address2 = json['address_2'];
+    city = json['city'];
+    postcode = json['postcode'];
+    country = json['country'];
+    state = json['state'];
+    email = json['email'];
+    phone = json['phone'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['first_name'] = this._firstName;
-    data['last_name'] = this._lastName;
-    data['company'] = this._company;
-    data['address_1'] = this._address1;
-    data['address_2'] = this._address2;
-    data['city'] = this._city;
-    data['postcode'] = this._postcode;
-    data['country'] = this._country;
-    data['state'] = this._state;
-    data['email'] = this._email;
-    data['phone'] = this._phone;
+    data['first_name'] = this.firstName;
+    data['last_name'] = this.lastName;
+    data['company'] = this.company;
+    data['address_1'] = this.address1;
+    data['address_2'] = this.address2;
+    data['city'] = this.city;
+    data['postcode'] = this.postcode;
+    data['country'] = this.country;
+    data['state'] = this.state;
+    data['email'] = this.email;
+    data['phone'] = this.phone;
     return data;
   }
 }

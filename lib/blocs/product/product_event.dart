@@ -17,7 +17,7 @@ class ProductGetOfCate extends ProductEvent {
 }
 
 class ProductGetOne extends ProductEvent {
-  final int Id;
+  final int id;
 
-  ProductGetOne({this.Id});
+  ProductGetOne({this.id});
 }

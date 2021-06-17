@@ -12,10 +12,10 @@ class ReviewRepository extends Repository{
     return results;
   }
 
-  Future<int> addReview({int member_id, int product_id, String content,}) async {
-    var response = await httpManager.post(url: '/api/review', data: {
-      'member_id': member_id,
-      'product_id': product_id,
+  Future<int> addReview({int memberId, int productId, String content,}) async {
+    await httpManager.post(url: '/api/review', data: {
+      'member_id': memberId,
+      'product_id': productId,
       'content': content,
     });
     return 1;

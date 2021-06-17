@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Layout(
-      header: headerHome(),
+      header: HeaderHome(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                         e.name,
                         e.description),
                     onTap: () {
-                      AppBloc.bannerBloc.add(BannerGetOne(Id: e.id));
+                      AppBloc.bannerBloc.add(BannerGetOne(id: e.id));
                       AppBloc.productBloc
                           .add(ProductGetOfCate(categoryId: e.id));
                       Navigator.pushNamed(context, AppRoute.banner);
@@ -93,11 +93,11 @@ class HomeScreen extends StatelessWidget {
                       List<Images> images = e.images;
                       return GestureDetector(
                         onTap: () {
-                          AppBloc.productBloc.add(ProductGetOne(Id: e.id));
+                          AppBloc.productBloc.add(ProductGetOne(id: e.id));
                           //  AppBloc.reviewBloc.add(ReviewGetAll(productId: e.id));
                           Navigator.pushNamed(context, AppRoute.productDetail);
                         },
-                        child: _buildRecom(
+                        child: _BuildRecom(
                           id: e.id,
                           name: e.name,
                           image: images[0].src,
@@ -164,27 +164,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 80),
-
-          ///////////////////////////////////////////// POST
-
-          /* ElevatedButton(
-            onPressed: () {
-              AppBloc.categoryBloc.add(ThemCate(name: textController.text));
-            },
-            child: Text('Bam'),
-          ),*/
-          ///////////////////////////////////////////// POST
         ],
       ),
-    );
-  }
-
-  Widget _buildBtn(context, title) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.pushNamed(context, AppRoute.test);
-      },
-      child: Text(title),
     );
   }
 
@@ -287,7 +268,8 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _buildRecom extends StatefulWidget {
+// ignore: must_be_immutable
+class _BuildRecom extends StatefulWidget {
   final int id;
   final String name;
   final String image;
@@ -296,7 +278,7 @@ class _buildRecom extends StatefulWidget {
   final String price;
   bool fav;
 
-  _buildRecom(
+  _BuildRecom(
       {this.id,
       this.name,
       this.image,
@@ -306,10 +288,10 @@ class _buildRecom extends StatefulWidget {
       this.fav});
 
   @override
-  __buildRecomState createState() => __buildRecomState();
+  _BuildRecomState createState() => _BuildRecomState();
 }
 
-class __buildRecomState extends State<_buildRecom> {
+class _BuildRecomState extends State<_BuildRecom> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -359,8 +341,8 @@ class __buildRecomState extends State<_buildRecom> {
                                 widget.fav = !widget.fav;
                               });
                               AppBloc.wishlistItemBloc.add(AddWishlist(
-                                  wishlist_id: SharedPrefs.getWishlistId(),
-                                  product_id: widget.id));
+                                  wishlistId: SharedPrefs.getWishlistId(),
+                                  productId: widget.id));
                             },
                             child: Icon(
                               widget.fav
@@ -423,7 +405,7 @@ class __buildRecomState extends State<_buildRecom> {
                                 GestureDetector(
                                   onTap: () {
                                     AppBloc.bagItemBloc.add(AddBagItem(
-                                        product_id: widget.id, quantity: 1));
+                                        productId: widget.id, quantity: 1));
                                   },
                                   child: Text(
                                     AppLocalizations.t(context, 'addToCart'),
@@ -456,7 +438,7 @@ class __buildRecomState extends State<_buildRecom> {
   }
 }
 
-class headerHome extends StatelessWidget with PreferredSizeWidget {
+class HeaderHome extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 

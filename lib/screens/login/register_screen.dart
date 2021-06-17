@@ -10,10 +10,8 @@ import 'package:florist/screens/login/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-// import 'package:international_phone_input/international_phone_input.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -73,7 +71,7 @@ class RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return isRegisterScreen ? registerScreen() : OTPScreen();
+    return isRegisterScreen ? registerScreen() : otpScreen();
   }
 
   Widget registerScreen() {
@@ -347,7 +345,7 @@ class RegisterScreenState extends State<RegisterScreen> {
   }
 
   bool validatePhone(String value) {
-    Pattern pattern = '';
+    // Pattern pattern = '';
     RegExp regex = new RegExp("^[+][0-9]*\$");
     if (!regex.hasMatch(value))
       return false;
@@ -355,7 +353,7 @@ class RegisterScreenState extends State<RegisterScreen> {
       return true;
   }
 
-  Widget OTPScreen() {
+  Widget otpScreen() {
     if (resend) {
       startTimer();
       resend = false;
@@ -429,7 +427,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                     selectedColor: AppColor.greenMain,
                     inactiveColor: AppColor.black30per,
                   ),
-                  onCompleted: (OTPcode) async {
+                  onCompleted: (otpCode) async {
                     if (_formKeyOTP.currentState.validate()) {
                       // If the form is valid, we want to show a loading Snackbar
                       // If the form is valid, we want to do firebase signup...
@@ -440,7 +438,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                         await _auth
                             .signInWithCredential(PhoneAuthProvider.credential(
                                 verificationId: verificationCode,
-                                smsCode: OTPcode.toString()))
+                                smsCode: otpCode.toString()))
                             .then((user) async => {
                                   //sign in was success
                                   if (user != null)
@@ -480,6 +478,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                                       )
                                     }
                                 })
+                            // ignore: return_of_invalid_type_from_catch_error
                             .catchError((error) => {
                                   setState(() {
                                     isLoading = false;

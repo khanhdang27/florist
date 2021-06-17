@@ -4,12 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:florist/blocs/blocs.dart';
 import 'package:florist/library/shared_preferences.dart';
 import 'package:florist/screens/screens.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Gate extends StatelessWidget {
-  int member_id = SharedPrefs.getMemberId();
+  final int memberId = SharedPrefs.getMemberId();
   Gate() {
-    AppBloc.wishlistBloc.add(WishlistGetOne(id: member_id));
+    AppBloc.wishlistBloc.add(WishlistGetOne(id: memberId));
   }
 
   @override

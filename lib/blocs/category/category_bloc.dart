@@ -21,8 +21,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
         yield CategoryGetAllSuccess(
           items: categories,
         );
-      } else {
-        yield CategoryGetAllFailed();
       }
     }
   }

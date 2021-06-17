@@ -26,8 +26,6 @@ class CouponBloc extends Bloc<CouponEvent, CouponState> {
         yield CouponGetAllSuccess(
           items: coupons,
         );
-      } else {
-        yield CouponGetAllFailed();
       }
     }
   }

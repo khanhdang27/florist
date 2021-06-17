@@ -16,13 +16,11 @@ class CreditBloc extends Bloc<CreditEvent, CreditState> {
   @override
   Stream<CreditState> mapEventToState(CreditEvent event,) async* {
     if (event is CreditGetOne) {
-      Credit credit = await creditRepository.getOne(Id: event.Id);
+      Credit credit = await creditRepository.getOne(id: event.id);
       if (true) {
         yield CreditGetOneSuccess(
           item: credit,
         );
-      } else {
-        yield CreditGetOneFailed();
       }
     }
 

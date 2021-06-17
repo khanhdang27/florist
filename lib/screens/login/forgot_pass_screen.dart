@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:florist/configs/configs.dart';
 import 'package:florist/screens/components/components.dart';
 
+// ignore: must_be_immutable
 class ForgotPassScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();

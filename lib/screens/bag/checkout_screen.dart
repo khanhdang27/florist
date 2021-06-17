@@ -14,14 +14,13 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:florist/library/format_datetime.dart';
 
-
 class CheckoutScreen extends StatefulWidget {
-  int subtotal;
-  int cost;
+  final int subtotal;
+  final int cost;
 
   CheckoutScreen({this.subtotal, this.cost}) {
-    AppBloc.creditBloc.add(CreditGetOne(Id: SharedPrefs.getMemberId()));
-    AppBloc.shippingBloc.add(ShippingGetOne(Id: SharedPrefs.getMemberId()));
+    AppBloc.creditBloc.add(CreditGetOne(id: SharedPrefs.getMemberId()));
+    AppBloc.shippingBloc.add(ShippingGetOne(id: SharedPrefs.getMemberId()));
   }
 
   @override
@@ -36,7 +35,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
   TextEditingController addressController = TextEditingController();
   TextEditingController creditController = TextEditingController();
 
-  Timer _debounce ;
+  Timer _debounce;
 
   int costPrice = 10;
   bool isLoading = false;
@@ -83,7 +82,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
               margin: EdgeInsets.only(left: 15, top: 10),
               decoration: BoxDecoration(
                 borderRadius:
-                BorderRadius.horizontal(left: Radius.circular(10)),
+                    BorderRadius.horizontal(left: Radius.circular(10)),
                 color: AppColor.whiteMain,
               ),
               child: Column(
@@ -133,207 +132,207 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                         ),
                         info
                             ? BlocBuilder(
-                            builder: (context, state) {
-                              if (state is ShippingGetOneSuccess) {
-                                nameController.text = state.item.firstName;
-                                phoneController.text = state.item.phone;
-                                addressController.text =
-                                    state.item.address2 +
-                                        ', ' +
-                                        state.item.address1 +
-                                        ', ' +
-                                        state.item.city;
-                                return Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                AppLocalizations.t(context,
-                                                    'recipientName'),
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color:
-                                                  AppColor.black50per,
-                                                  fontFamily:
-                                                  AppFont.fAvenir,
-                                                  fontWeight:
-                                                  AppFont.wMedium,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                child: TextField(
-                                                  controller:
-                                                  nameController,
-                                                  //   initialValue: state.item.name,
-                                                  decoration:
-                                                  InputDecoration(
-                                                    hintText:
-                                                    AppLocalizations.t(
-                                                        context,
-                                                        'name'),
-                                                    hintStyle: TextStyle(
-                                                      color: AppColor
-                                                          .black40per,
-                                                      fontFamily:
-                                                      AppFont.fAvenir,
-                                                    ),
-                                                    border:
-                                                    InputBorder.none,
-                                                    focusedBorder:
-                                                    InputBorder.none,
-                                                    enabledBorder:
-                                                    InputBorder.none,
-                                                    errorBorder:
-                                                    InputBorder.none,
-                                                  ),
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily:
-                                                    AppFont.fAvenir,
-                                                    fontWeight:
-                                                    AppFont.wMedium,
-                                                  ),
-                                                ),
-                                                height: 20,
-                                                width: 150,
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                AppLocalizations.t(
-                                                    context, 'teleNum'),
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color:
-                                                  AppColor.black50per,
-                                                  fontFamily:
-                                                  AppFont.fAvenir,
-                                                  fontWeight:
-                                                  AppFont.wMedium,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              SizedBox(
-                                                child: TextField(
-                                                  controller:
-                                                  phoneController,
-                                                  //   initialValue: state.item.name,
-                                                  decoration:
-                                                  InputDecoration(
-                                                    hintText:
-                                                    AppLocalizations.t(
-                                                        context,
-                                                        'phone'),
-                                                    hintStyle: TextStyle(
-                                                      color: AppColor
-                                                          .black40per,
-                                                      fontFamily:
-                                                      AppFont.fAvenir,
-                                                    ),
-                                                    border:
-                                                    InputBorder.none,
-                                                    focusedBorder:
-                                                    InputBorder.none,
-                                                    enabledBorder:
-                                                    InputBorder.none,
-                                                    errorBorder:
-                                                    InputBorder.none,
-                                                  ),
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily:
-                                                    AppFont.fAvenir,
-                                                    fontWeight:
-                                                    AppFont.wMedium,
-                                                  ),
-                                                ),
-                                                height: 20,
-                                                width: 130,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox()
-                                        ],
-                                      ),
-                                    ),
-                                    Column(
+                                builder: (context, state) {
+                                  if (state is ShippingGetOneSuccess) {
+                                    nameController.text = state.item.firstName;
+                                    phoneController.text = state.item.phone;
+                                    addressController.text =
+                                        state.item.address2 +
+                                            ', ' +
+                                            state.item.address1 +
+                                            ', ' +
+                                            state.item.city;
+                                    return Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          AppLocalizations.t(
-                                              context, 'addressLine'),
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: AppColor.black50per,
-                                            fontFamily: AppFont.fAvenir,
-                                            fontWeight: AppFont.wMedium,
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    AppLocalizations.t(context,
+                                                        'recipientName'),
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color:
+                                                          AppColor.black50per,
+                                                      fontFamily:
+                                                          AppFont.fAvenir,
+                                                      fontWeight:
+                                                          AppFont.wMedium,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    child: TextField(
+                                                      controller:
+                                                          nameController,
+                                                      //   initialValue: state.item.name,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText:
+                                                            AppLocalizations.t(
+                                                                context,
+                                                                'name'),
+                                                        hintStyle: TextStyle(
+                                                          color: AppColor
+                                                              .black40per,
+                                                          fontFamily:
+                                                              AppFont.fAvenir,
+                                                        ),
+                                                        border:
+                                                            InputBorder.none,
+                                                        focusedBorder:
+                                                            InputBorder.none,
+                                                        enabledBorder:
+                                                            InputBorder.none,
+                                                        errorBorder:
+                                                            InputBorder.none,
+                                                      ),
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily:
+                                                            AppFont.fAvenir,
+                                                        fontWeight:
+                                                            AppFont.wMedium,
+                                                      ),
+                                                    ),
+                                                    height: 20,
+                                                    width: 150,
+                                                  ),
+                                                ],
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    AppLocalizations.t(
+                                                        context, 'teleNum'),
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color:
+                                                          AppColor.black50per,
+                                                      fontFamily:
+                                                          AppFont.fAvenir,
+                                                      fontWeight:
+                                                          AppFont.wMedium,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  SizedBox(
+                                                    child: TextField(
+                                                      controller:
+                                                          phoneController,
+                                                      //   initialValue: state.item.name,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText:
+                                                            AppLocalizations.t(
+                                                                context,
+                                                                'phone'),
+                                                        hintStyle: TextStyle(
+                                                          color: AppColor
+                                                              .black40per,
+                                                          fontFamily:
+                                                              AppFont.fAvenir,
+                                                        ),
+                                                        border:
+                                                            InputBorder.none,
+                                                        focusedBorder:
+                                                            InputBorder.none,
+                                                        enabledBorder:
+                                                            InputBorder.none,
+                                                        errorBorder:
+                                                            InputBorder.none,
+                                                      ),
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily:
+                                                            AppFont.fAvenir,
+                                                        fontWeight:
+                                                            AppFont.wMedium,
+                                                      ),
+                                                    ),
+                                                    height: 20,
+                                                    width: 130,
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox()
+                                            ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 100),
-                                          child: SizedBox(
-                                            child: TextField(
-                                              keyboardType:
-                                              TextInputType.multiline,
-                                              maxLines: null,
-                                              controller: addressController,
-                                              //   initialValue: state.item.name,
-                                              decoration: InputDecoration(
-                                                hintText:
-                                                AppLocalizations.t(
-                                                    context, 'address'),
-                                                hintStyle: TextStyle(
-                                                  color:
-                                                  AppColor.black40per,
-                                                  fontFamily:
-                                                  AppFont.fAvenir,
-                                                ),
-                                                border: InputBorder.none,
-                                                focusedBorder:
-                                                InputBorder.none,
-                                                enabledBorder:
-                                                InputBorder.none,
-                                                errorBorder:
-                                                InputBorder.none,
-                                              ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              AppLocalizations.t(
+                                                  context, 'addressLine'),
                                               style: TextStyle(
                                                 fontSize: 14,
+                                                color: AppColor.black50per,
                                                 fontFamily: AppFont.fAvenir,
                                                 fontWeight: AppFont.wMedium,
                                               ),
                                             ),
-                                            height: 60,
-                                          ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 100),
+                                              child: SizedBox(
+                                                child: TextField(
+                                                  keyboardType:
+                                                      TextInputType.multiline,
+                                                  maxLines: null,
+                                                  controller: addressController,
+                                                  //   initialValue: state.item.name,
+                                                  decoration: InputDecoration(
+                                                    hintText:
+                                                        AppLocalizations.t(
+                                                            context, 'address'),
+                                                    hintStyle: TextStyle(
+                                                      color:
+                                                          AppColor.black40per,
+                                                      fontFamily:
+                                                          AppFont.fAvenir,
+                                                    ),
+                                                    border: InputBorder.none,
+                                                    focusedBorder:
+                                                        InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
+                                                    errorBorder:
+                                                        InputBorder.none,
+                                                  ),
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily: AppFont.fAvenir,
+                                                    fontWeight: AppFont.wMedium,
+                                                  ),
+                                                ),
+                                                height: 60,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
-                                    ),
-                                  ],
-                                );
-                              }
-                              return SizedBox();
-                            },
-                            bloc: AppBloc.shippingBloc)
+                                    );
+                                  }
+                                  return SizedBox();
+                                },
+                                bloc: AppBloc.shippingBloc)
                             : SizedBox(),
                       ],
                     ),
@@ -436,7 +435,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
               margin: EdgeInsets.only(left: 15, top: 10),
               decoration: BoxDecoration(
                 borderRadius:
-                BorderRadius.horizontal(left: Radius.circular(10)),
+                    BorderRadius.horizontal(left: Radius.circular(10)),
                 color: AppColor.whiteMain,
               ),
               child: Column(
@@ -533,7 +532,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset:
-                                Offset(0, 3), // changes position of shadow
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                             color: Colors.white,
@@ -544,7 +543,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                               border: InputBorder.none,
                               errorBorder: InputBorder.none,
                               contentPadding:
-                              EdgeInsets.only(top: 15, left: 15),
+                                  EdgeInsets.only(top: 15, left: 15),
                               suffixIcon: Padding(
                                 padding: const EdgeInsets.only(top: 15),
                                 child: Icon(Icons.arrow_forward,
@@ -582,7 +581,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                               padding: const EdgeInsets.only(right: 20),
                               child: Text(
                                 AppLocalizations.t(
-                                    context, 'youCurrentHavePoints') +
+                                        context, 'youCurrentHavePoints') +
                                     ': 312',
                                 style: TextStyle(
                                   fontSize: 14,
@@ -606,7 +605,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset:
-                                Offset(0, 3), // changes position of shadow
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                             color: Colors.white,
@@ -617,7 +616,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                               border: InputBorder.none,
                               errorBorder: InputBorder.none,
                               contentPadding:
-                              EdgeInsets.only(top: 15, left: 15),
+                                  EdgeInsets.only(top: 15, left: 15),
                             ),
                           ),
                         ),
@@ -733,25 +732,25 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                   GestureDetector(
                     onTap: () {
                       if (info && credit) {
-                        int bag_id = SharedPrefs.getBagId();
+                        int bagId = SharedPrefs.getBagId();
                         payViaExistingCard(context, card);
                         AppBloc.bagBloc.add(UpdateBag(
-                          id: bag_id,
+                          id: bagId,
                           name: nameController.text,
                           phone: phoneController.text,
                           address: addressController.text,
                           pay: (widget.subtotal + widget.cost).toString(),
                         ));
                         AppBloc.orderBloc.add(OrderAdd(
-                          bag_id: bag_id,
+                          bagId: bagId,
                           subtotal: widget.subtotal,
-                          total: widget.subtotal + widget.cost,));
+                          total: widget.subtotal + widget.cost,
+                        ));
 
-                        _debounce = Timer(const Duration(milliseconds: 5000), () {
+                        _debounce =
+                            Timer(const Duration(milliseconds: 5000), () {
                           Navigator.pushNamed(context, AppRoute.paid);
                         });
-
-
                       } else {
                         Fluttertoast.showToast(
                             msg: AppLocalizations.t(context, 'pleaseAddCard'));
@@ -796,19 +795,20 @@ class CheckoutScreenState extends State<CheckoutScreen> {
       expYear: int.parse(expiryArr[1]),
     );
     var response = await StripeService.payViaExistingCard(
-        amount: ((widget.subtotal + widget.cost)*100).toString(),  // nhân 100 bởi vì Stripe thích vậy
+        amount: ((widget.subtotal + widget.cost) * 100).toString(),
+        // nhân 100 bởi vì Stripe thích vậy
         currency: 'HKD',
         card: stripeCard);
     await dialog.hide();
-    Scaffold
-        .of(context)
+    Scaffold.of(context)
+        // ignore: deprecated_member_use
         .showSnackBar(SnackBar(
-      content: Text(response.message),
-      duration: new Duration(milliseconds: 120000),
-    ))
+          content: Text(response.message),
+          duration: new Duration(milliseconds: 120000),
+        ))
         .closed
         .then((_) {
-         Navigator.pushNamed(context, AppRoute.paid);
+      Navigator.pushNamed(context, AppRoute.paid);
     });
   }
 

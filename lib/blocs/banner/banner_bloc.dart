@@ -20,19 +20,15 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
         yield BannerGetAllSuccess(
           items: banners,
         );
-      } else {
-        yield BannerGetAllFailed();
       }
     }
 
     if (event is BannerGetOne) {
-      BannerDB banner = await bannerRepository.getOne(Id: event.Id);
+      BannerDB banner = await bannerRepository.getOne(id: event.id);
       if (true) {
         yield BannerGetOneSuccess(
           item: banner,
         );
-      } else {
-        yield BannerGetOneFailed();
       }
     }
   }

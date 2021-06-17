@@ -1,9 +1,6 @@
-import 'package:florist/models/models.dart';
-
 class ProductWL {
   int productId;
   int quantity;
-
 
   ProductWL({this.productId, this.quantity});
 

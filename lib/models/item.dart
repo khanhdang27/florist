@@ -48,7 +48,7 @@ class Items {
     soldIndividually = json['sold_individually'];
     permalink = json['permalink'];
     if (json['images'] != null) {
-      images = new List<Images>();
+      images = [];
       json['images'].forEach((v) {
         images.add(new Images.fromJson(v));
       });

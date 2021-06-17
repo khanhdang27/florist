@@ -262,9 +262,9 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                                       fav = !fav;
                                     });
                                     AppBloc.wishlistItemBloc.add(AddWishlist(
-                                        wishlist_id:
+                                        wishlistId:
                                             SharedPrefs.getWishlistId(),
-                                        product_id: state.item.id));
+                                        productId: state.item.id));
                                   },
                                   child: Icon(
                                     fav
@@ -293,7 +293,7 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                                       GestureDetector(
                                         onTap: () {
                                           AppBloc.bagItemBloc.add(AddBagItem(
-                                            product_id: state.item.id,
+                                            productId: state.item.id,
                                             quantity: quantity,
                                           ));
                                           Navigator.pushNamedAndRemoveUntil(context, AppRoute.bag, (route) => false);
@@ -376,8 +376,8 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                                     controller: contentController,
                                     onFieldSubmitted: (value) {
                                       AppBloc.reviewBloc.add(ReviewAdd(
-                                        member_id: SharedPrefs.getMemberId(),
-                                        product_id: state.item.id,
+                                        memberId: SharedPrefs.getMemberId(),
+                                        productId: state.item.id,
                                         content: value.trim(),
                                       ));
                                       contentController.clear();
@@ -395,7 +395,7 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                               )
                             ],
                           ),
-                          review(),
+                          Review(),
                         ],
                       ),
                     ),
@@ -500,7 +500,7 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
   }
 }
 
-class review extends StatelessWidget {
+class Review extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(

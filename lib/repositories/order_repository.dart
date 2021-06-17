@@ -18,9 +18,9 @@ class OrderRepository extends Repository{
     return results;
   }
 
-  Future<int> addOrder({int bag_id, int subtotal, int total,}) async {
-    var response = await httpManager.post(url: '/api/order', data: {
-      'bag_id': bag_id,
+  Future<int> addOrder({int bagId, int subtotal, int total,}) async {
+    await httpManager.post(url: '/api/order', data: {
+      'bag_id': bagId,
       'subtotal': subtotal,
       'total': total,
     });

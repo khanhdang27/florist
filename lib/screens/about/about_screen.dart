@@ -7,7 +7,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutWhite(
-      header: headerAbout(),
+      header: HeaderAbout(),
       child: Padding(
         padding: const EdgeInsets.only(left: 35, right:35, top: 40, bottom: 100),
         child: Column(
@@ -36,7 +36,7 @@ class AboutScreen extends StatelessWidget {
   }
 }
 
-class headerAbout extends StatelessWidget with PreferredSizeWidget{
+class HeaderAbout extends StatelessWidget with PreferredSizeWidget{
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 

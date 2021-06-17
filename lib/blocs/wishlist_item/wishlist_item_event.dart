@@ -4,11 +4,11 @@ part of 'wishlist_item_bloc.dart';
 abstract class WishlistItemEvent {}
 
 class AddWishlist extends WishlistItemEvent {
-  final int wishlist_id;
-  final int product_id;
+  final int wishlistId;
+  final int productId;
   final int quantity;
 
-  AddWishlist({this.wishlist_id, this.product_id, this.quantity});
+  AddWishlist({this.wishlistId, this.productId, this.quantity});
 }
 
 class ChangeQuantity extends WishlistItemEvent {
@@ -20,7 +20,7 @@ class ChangeQuantity extends WishlistItemEvent {
 
 class DeleteItem extends WishlistItemEvent {
   final int id;
-  final int product_id;
+  final int productId;
 
-  DeleteItem({this.id,this.product_id});
+  DeleteItem({this.id,this.productId});
 }

@@ -28,16 +28,16 @@ class BottomMenu extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          buildBtn(
+          BuildBtn(
               path: AppRoute.home, icon: AppIcon.icon_flower, title: 'store'),
 
-          buildBtn(
+          BuildBtn(
               path: AppRoute.gate, icon: AppIcon.icon_tim, title: 'favourite'),
-          buildBtn(
+          BuildBtn(
               path: AppRoute.setting,
               icon: AppIcon.icon_user,
               title: 'myAccount'),
-          buildBtn(
+          BuildBtn(
               path: AppRoute.search,
               icon: AppIcon.icon_search,
               title: 'searchFor'),
@@ -45,7 +45,7 @@ class BottomMenu extends StatelessWidget {
             alignment: Alignment.topRight,
             children: [
               Container(
-                child: buildBtn(
+                child: BuildBtn(
                     path: AppRoute.bag,
                     icon: AppIcon.icon_bag_1,
                     title: 'shoppingBag'),
@@ -99,12 +99,12 @@ class BottomMenu extends StatelessWidget {
   }
 }
 
-class buildBtn extends StatelessWidget {
-  IconData icon;
-  String path;
-  String title;
+class BuildBtn extends StatelessWidget {
+  final IconData icon;
+  final String path;
+  final String title;
 
-  buildBtn({this.icon, this.path, this.title});
+  BuildBtn({this.icon, this.path, this.title});
 
   @override
   Widget build(BuildContext context) {

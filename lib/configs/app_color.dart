@@ -47,8 +47,8 @@ class AppColor {
   static Color banner2 = Color(0xFFCAD4DD);
   static Color banner3 = Color(0xFF8DABC4);
   static Color blueFB = Color(0xFF4267B2);
-  static Color C4 = Color(0xFFC4C4C4);
-  static Color C13636 = Color(0xFFC13636);
+  static Color c4 = Color(0xFFC4C4C4);
+  static Color c13636 = Color(0xFFC13636);
 
   //Singleton factory
   static final AppColor _instance = AppColor._internal();
