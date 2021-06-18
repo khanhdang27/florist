@@ -7,6 +7,8 @@ class ProductReset extends ProductEvent {}
 
 class ProductGetRecom extends ProductEvent {}
 
+class ProductGetAll extends ProductEvent {}
+
 class ProductGetOfCate extends ProductEvent {
   final int categoryId;
   final String sort;

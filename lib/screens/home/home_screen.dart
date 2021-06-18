@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen() {
     AppBloc.categoryBloc.add(CategoryGetAll());
     AppBloc.productBloc.add(ProductGetRecom());
+    AppBloc.productBloc.add(ProductGetAll());
     AppBloc.bannerBloc.add(BannerGetAll());
     AppBloc.wishlistBloc.add(WishlistGetAll());
     AppBloc.memberBloc.add(MemberGetOne());
@@ -70,7 +71,6 @@ class HomeScreen extends StatelessWidget {
               return current is BannerGetAllSuccess;
             },
           ),
-
           Container(
             margin: EdgeInsets.only(top: 50, left: 30),
             child: Text(
@@ -82,7 +82,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-
           BlocBuilder(
             builder: (context, state) {
               if (state is ProductGetRecomSuccess) {
@@ -118,7 +117,6 @@ class HomeScreen extends StatelessWidget {
               return current is ProductGetRecomSuccess;
             },
           ),
-
           Container(
             margin: EdgeInsets.all(30),
             child: Text(
@@ -442,6 +440,8 @@ class HeaderHome extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
 
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -457,35 +457,46 @@ class HeaderHome extends StatelessWidget with PreferredSizeWidget {
           ),
         ),
         Expanded(
-            child: Container(
-                margin: EdgeInsets.only(right: 10),
-                decoration: BoxDecoration(
-                  color: AppColor.whiteF8,
-                  borderRadius: BorderRadius.circular(35),
+          child: Container(
+            margin: EdgeInsets.only(right: 10),
+            decoration: BoxDecoration(
+              color: AppColor.whiteF8,
+              borderRadius: BorderRadius.circular(35),
+            ),
+            padding: EdgeInsets.all(15),
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: (){
+                    Navigator.pushReplacementNamed(context, AppRoute.search, arguments: {'textSearch': searchController.text});
+                  },
+                  child: Icon(AppIcon.icon_search2,
+                      size: 20, color: AppColor.black52per),
                 ),
-                padding: EdgeInsets.all(15),
-                child: Row(
-                  children: [
-                    Icon(AppIcon.icon_search2,
-                        size: 20, color: AppColor.black52per),
-                    Expanded(
-                      child: Container(
-                        height: 20,
-                        margin: EdgeInsets.only(left: 10, right: 5),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              hintText:
-                                  AppLocalizations.t(context, 'searchFor'),
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.only(top: 30)),
-                        ),
+                Expanded(
+                  child: Container(
+                    height: 20,
+                    margin: EdgeInsets.only(left: 10, right: 5),
+                    child: TextField(
+                      controller: searchController,
+                      onSubmitted:(textSearch) {
+                        Navigator.pushReplacementNamed(context, AppRoute.search, arguments: {'textSearch': textSearch});
+                      },
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.t(context, 'searchFor'),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(top: 30),
                       ),
-                    )
-                  ],
-                )))
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

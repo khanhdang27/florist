@@ -66,6 +66,14 @@ class ProductRepository extends Repository{
     return results;
   }
 
+  Future<List<Product>> getAll() async {
+    List response = await httpManager.get(url: 'wp-json/wc/store/products');
+    List<Product> results = response.map((e) {
+      return Product.fromJson(e);
+    }).toList();
+    return results;
+  }
+
   Future<List<Product>> getOfCate(int categoryId) async {
     // var response = await httpManager.get(url: '/api/product/productOfCate/$categoryId');
     List response = await httpManager.get(url: 'wp-json/wc/store/products');

@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:florist/screens/components/app_screen.dart';
 import 'package:florist/screens/screens.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AppRoute {
   static const String home = '/home';
@@ -127,7 +127,14 @@ class AppRoute {
       case AppRoute.search:
         return MaterialPageRoute(
           builder: (context) {
-            return SearchScreen();
+            Map arg = settings.arguments;
+            String param = '';
+            if (arg != null) {
+              param = arg['textSearch'];
+            }
+            return SearchScreen(
+              textSearch: param,
+            );
           },
           settings: settings,
         );

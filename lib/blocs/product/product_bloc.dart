@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:florist/configs/configs.dart';
 import 'package:flutter/material.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/product_repository.dart';
@@ -25,6 +26,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         yield ProductGetRecomSuccess(
           items: products,
         );
+      }
+    }
+
+    if (event is ProductGetAll) {
+      appProductList.appProductListContainer = await productRepository.getAll();
+      if (true) {
+        yield ProductGetAllSuccess();
       }
     }
 

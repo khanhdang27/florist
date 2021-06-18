@@ -13,6 +13,10 @@ class ProductGetRecomSuccess extends ProductState{
 
 class ProductGetRecomFailed extends ProductState{}
 
+class ProductGetAllSuccess extends ProductState{}
+
+class ProductGetAllFailed extends ProductState{}
+
 class ProductGetOfCateSuccess extends ProductState{
   final List<Product> items;
 
