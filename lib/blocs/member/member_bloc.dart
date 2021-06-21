@@ -53,10 +53,8 @@ class MemberBloc extends Bloc<MemberEvent, MemberState> {
     if (event is ResetPass) {
       int result = await memberRepository.resetPass(pass: event.pass,id: event.id);
       if (result == 1) {
-        print('ksjdhf');
         yield ForgotPassSuccess();
       } else {
-        print('sdfsdfsdfsdfsf');
         yield ForgotPassFailed();
       }
     }

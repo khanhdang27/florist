@@ -1,8 +1,8 @@
 import 'package:florist/blocs/blocs.dart';
+import 'package:florist/configs/configs.dart';
 import 'package:florist/library/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:florist/configs/configs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BannerHeaderBar extends StatefulWidget with PreferredSizeWidget {
@@ -61,15 +61,20 @@ class _BannerHeaderBar extends State<BannerHeaderBar> {
                   ),
                 ],
               ),
-              Container(
-                margin: EdgeInsets.only(right: 20, left: 15, bottom: 5),
-                height: 35,
-                width: 35,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage(SharedPrefs.getAvatar()),
-                    fit: BoxFit.cover,
+              InkWell(
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, AppRoute.setting);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(right: 20, left: 15, bottom: 5),
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(SharedPrefs.getAvatar()),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -90,7 +95,7 @@ class _BannerHeaderBar extends State<BannerHeaderBar> {
       ),
       child: Text(
         '$num',
-        style: TextStyle(color: Colors.white, fontSize: num>9?12:14),
+        style: TextStyle(color: Colors.white, fontSize: num > 9 ? 12 : 14),
       ),
     );
   }

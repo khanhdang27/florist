@@ -32,7 +32,6 @@ class SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-   print(empty);
     return LayoutGreenNotScroll(
       child: Column(
         children: [

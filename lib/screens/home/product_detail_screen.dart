@@ -349,7 +349,7 @@ class _ProductDetailScreen extends State<ProductDetailScreen> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                    image: AssetImage(AppAsset.avatar),
+                                    image: NetworkImage(SharedPrefs.getAvatar()),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
