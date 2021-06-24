@@ -5,7 +5,6 @@ import 'package:florist/screens/components/components.dart';
 import 'package:florist/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,7 +18,7 @@ class LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailOrPhoneController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool _isRembemerMe = false;
+  bool _isRememberMe = false;
   bool _isObscure = true;
 
   @override
@@ -154,10 +153,10 @@ class LoginScreenState extends State<LoginScreen> {
                     children: [
                       Checkbox(
                         activeColor: AppColor.greenMain,
-                        value: _isRembemerMe,
+                        value: _isRememberMe,
                         onChanged: (newValue) {
                           setState(() {
-                            _isRembemerMe = newValue;
+                            _isRememberMe = newValue;
                           });
                         },
                       ),
@@ -187,7 +186,7 @@ class LoginScreenState extends State<LoginScreen> {
                 Map creds = {
                   'username': _emailOrPhoneController.text,
                   'password': _passwordController.text,
-                  'remember_me': _isRembemerMe,
+                  'remember_me': _isRememberMe,
                 };
                  if (_formKey.currentState.validate()) {
                   var response = Provider.of<Auth>(context, listen: false)
