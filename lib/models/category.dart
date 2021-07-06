@@ -1,40 +1,73 @@
-/*
+import 'package:florist/models/models.dart';
+
 class Category {
-  int id;
+  dynamic termId;
   String name;
-  String image;
-  int active;
-  String createdAt;
-  String updatedAt;
+  String slug;
+  dynamic termGroup;
+  int termTaxonomyId;
+  String taxonomy;
+  String description;
+  int parent;
+  int count;
+  String filter;
+  List<ProductList> productList;
+  int productCount;
 
   Category(
-      {this.id,
-        this.name,
-        this.image,
-        this.active,
-        this.createdAt,
-        this.updatedAt});
+      {this.termId,
+      this.name,
+      this.slug,
+      this.termGroup,
+      this.termTaxonomyId,
+      this.taxonomy,
+      this.description,
+      this.parent,
+      this.count,
+      this.filter,
+      this.productList,
+      this.productCount});
 
   Category.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    termId = json['term_id'];
     name = json['name'];
-    image = json['image'];
-    active = json['active'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    slug = json['slug'];
+    termGroup = json['term_group'];
+    termTaxonomyId = json['term_taxonomy_id'];
+    taxonomy = json['taxonomy'];
+    description = json['description'];
+    parent = json['parent'];
+    count = json['count'];
+    filter = json['filter'];
+    if (json['product_list'] != null) {
+      productList = new List<ProductList>();
+      json['product_list'].forEach((v) {
+        productList.add(new ProductList.fromJson(v));
+      });
+    }
+    productCount = json['product_count'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
+    data['term_id'] = this.termId;
     data['name'] = this.name;
-    data['image'] = this.image;
-    data['active'] = this.active;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    data['slug'] = this.slug;
+    data['term_group'] = this.termGroup;
+    data['term_taxonomy_id'] = this.termTaxonomyId;
+    data['taxonomy'] = this.taxonomy;
+    data['description'] = this.description;
+    data['parent'] = this.parent;
+    data['count'] = this.count;
+    data['filter'] = this.filter;
+    if (this.productList != null) {
+      data['product_list'] = this.productList.map((v) => v.toJson()).toList();
+    }
+    data['product_count'] = this.productCount;
     return data;
   }
-}*/
+}
+/*
 import 'package:florist/models/models.dart';
 
 class Category {
@@ -65,4 +98,4 @@ class Category {
     }
     return data;
   }
-}
+}*/

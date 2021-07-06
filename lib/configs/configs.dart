@@ -8,3 +8,4 @@ export 'app_wishlist.dart';
 export 'app_product.dart';
 export 'app_coupon.dart';
 export 'app_db.dart';
+export 'app_config.dart';

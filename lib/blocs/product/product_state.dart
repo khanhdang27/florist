@@ -18,7 +18,7 @@ class ProductGetAllSuccess extends ProductState{}
 class ProductGetAllFailed extends ProductState{}
 
 class ProductGetOfCateSuccess extends ProductState{
-  final List<Product> items;
+  final List<ProductList> items;
 
   ProductGetOfCateSuccess({this.items});
 }

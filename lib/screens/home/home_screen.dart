@@ -36,13 +36,12 @@ class HomeScreen extends StatelessWidget {
                   return GestureDetector(
                     child: _buildBanner(
                         context,
-                        e.image == null ? e.image : e.image.src,
                         e.name,
                         e.description),
                     onTap: () {
-                      AppBloc.bannerBloc.add(BannerGetOne(id: e.id));
+                      AppBloc.bannerBloc.add(BannerGetOne(id: e.termId));
                       AppBloc.productBloc
-                          .add(ProductGetOfCate(categoryId: e.id));
+                          .add(ProductGetOfCate(categoryId: e.termId));
                       Navigator.pushNamed(context, AppRoute.banner);
                     },
                   );
@@ -141,13 +140,12 @@ class HomeScreen extends StatelessWidget {
                       return GestureDetector(
                         onTap: () {
                           AppBloc.productBloc
-                              .add(ProductGetOfCate(categoryId: e.id));
-                          Navigator.pushNamed(context, AppRoute.productList);
+                              .add(ProductGetOfCate(categoryId: e.termId));
+                          Navigator.pushNamed(context, AppRoute.productList, arguments: {'categoryId': e.termId});
                         },
                         child: _buildCate(
                             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             context,
-                            e.image == null ? e.image : e.image.src,
                             e.name),
                       );
                     }).toList(),
@@ -168,7 +166,7 @@ class HomeScreen extends StatelessWidget {
   }
 
 //context, image, title, content
-  Widget _buildBanner(context, image, title, content) {
+  Widget _buildBanner(context, title, content) {
     return Container(
       height: 200,
       margin: EdgeInsets.only(
@@ -188,9 +186,11 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                    image: image != null
+                    image:
+                    /*image != null
                         ? NetworkImage(image)
-                        : AssetImage(AppAsset.bong2),
+                        : */
+                        AssetImage(AppAsset.bong2),
                     fit: BoxFit.cover),
               ),
             ),
@@ -227,7 +227,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCate(context, image, text) {
+  Widget _buildCate(context, text) {
     return Container(
       //width: 180,
       margin: EdgeInsets.only(left: 10, bottom: 10),
@@ -242,9 +242,11 @@ class HomeScreen extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: image != null
+                image:
+                /*image != null
                     ? NetworkImage(image)
-                    : AssetImage(AppAsset.bong2),
+                    : */
+                  AssetImage(AppAsset.bong2),
                 fit: BoxFit.cover,
               ),
             ),

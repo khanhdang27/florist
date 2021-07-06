@@ -18,7 +18,7 @@ class FilterScreen extends StatefulWidget {
 class _FilterScreenState extends State<FilterScreen> {
   String sort = 'price';
   double _lowerValue = 0;
-  double _upperValue = 250000;
+  double _upperValue = 2500;
 
   @override
   Widget build(BuildContext context) {
@@ -234,8 +234,8 @@ class _FilterScreenState extends State<FilterScreen> {
         child: FlutterSlider(
           values: [_lowerValue, _upperValue],
           rangeSlider: true,
-          max: 1000000,
-          step: FlutterSliderStep(step: 1000),
+          max: 10000,
+          step: FlutterSliderStep(step: 10),
           min: 0,
           tooltip: FlutterSliderTooltip(
             leftPrefix: Text(

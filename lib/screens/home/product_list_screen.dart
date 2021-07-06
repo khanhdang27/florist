@@ -10,12 +10,13 @@ import 'package:florist/screens/home/banner_header_bar.dart';
 import 'package:florist/screens/home/product_widget.dart';
 
 class ProductListScreen extends StatelessWidget {
-  final int bannerId;
-  final String sort;
-  final double minPrice;
-  final double maxPrice;
+  final int categoryId;
 
-  ProductListScreen({this.bannerId, this.sort, this.minPrice, this.maxPrice}) {
+  // final String sort;
+  // final double minPrice;
+  // final double maxPrice;
+
+  ProductListScreen({this.categoryId}) {
     AppBloc.productBloc.add(ProductGetRecom());
   }
 
@@ -48,7 +49,8 @@ class ProductListScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, AppRoute.filter);
+                        Navigator.pushNamed(context, AppRoute.filter,
+                            arguments: {'categoryId': categoryId});
                       },
                       child: Icon(
                         AppIcon.icon_setting,
@@ -71,21 +73,22 @@ class ProductListScreen extends StatelessWidget {
               if (state is ProductGetOfCateSuccess) {
                 return Column(
                   children: state.items.map((e) {
-                    List<Images> images = e.images;
+                    String img = e.image.substring(e.image.indexOf('src="') + 5, e.image.length);
+                    img = img.substring(0, img.indexOf('"'));
+                    // List<Images> images = e.images;
                     return GestureDetector(
-                        onTap: () {
+                        /*onTap: () {
                           AppBloc.productBloc.add(ProductGetOne(id: e.id));
                           AppBloc.reviewBloc.add(ReviewGetAll(productId: e.id));
                           Navigator.pushNamed(context, AppRoute.productDetail);
-                        },
+                        },*/
                         child: ProductWidget(
                             name: e.name,
-                            image: images[0].src,
-                            id: e.id,
-                            model: e.sku,
-                            review: e.averageRating + AppLocalizations.t(context, 'point'),//+' (${e.ratingCount})',
-                            //price: '\$${e.price}'
-                        ));
+                            image: img,
+                            id: 1,
+                            model: e.slug,
+                            review: '0' + AppLocalizations.t(context, 'point') + ' (0)',
+                            price: '\$${e.price}'));
                   }).toList(),
                 );
               }

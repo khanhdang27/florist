@@ -72,10 +72,11 @@ class AppRoute {
           builder: (context) {
             Map arg = settings.arguments;
             return ProductListScreen(
-                bannerId: arg['bannerId'],
-                sort: arg['sort'],
+                categoryId: arg['categoryId'],
+              /*  sort: arg['sort'],
                 minPrice: arg['minPrice'],
-                maxPrice: arg['maxPrice']);
+                maxPrice: arg['maxPrice']*/
+            );
           },
           settings: settings,
         );

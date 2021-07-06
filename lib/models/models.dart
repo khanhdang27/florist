@@ -25,3 +25,4 @@ export 'shipping_rate.dart';
 export 'total.dart';
 export 'item.dart';
 export 'destination.dart';
+export 'product_list.dart';

@@ -15,7 +15,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
   @override
   Stream<BannerState> mapEventToState(BannerEvent event) async* {
     if (event is BannerGetAll) {
-      List<BannerDB> banners = await bannerRepository.getAll();
+      List<Category> banners = await bannerRepository.getAll();
       if (true) {
         yield BannerGetAllSuccess(
           items: banners,
@@ -24,7 +24,7 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
     }
 
     if (event is BannerGetOne) {
-      BannerDB banner = await bannerRepository.getOne(id: event.id);
+      Category banner = await bannerRepository.getOne(id: event.id);
       if (true) {
         yield BannerGetOneSuccess(
           item: banner,

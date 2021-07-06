@@ -1,23 +1,29 @@
+import 'package:florist/configs/configs.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/repository.dart';
 
 class BannerRepository extends Repository{
 
-  Future<List<BannerDB>> getAll() async {
-    var response = await httpManager.get(url: 'wp-json/wc/store/products/categories');
-    List data = response;
+  Future<List<Category>> getAll() async {
+    var response = await httpManager.get(baseUrl: AppConfig().appUrlDidili,params: {
+      'action': 'get-cat-product-list'
+    });
+    List data = response['data'];
     if(data.length > 5)
       data = data.sublist(0,5);
-    List<BannerDB> results = data.map((e) {
-      return BannerDB.fromJson(e);
+    List<Category> results = data.map((e) {
+      return Category.fromJson(e);
     }).toList();
     return results;
   }
 
-  Future<BannerDB> getOne({int id}) async {
-    var response = await httpManager.get(url: 'wp-json/wc/store/products/categories/$id');
-    var data = response;
-    BannerDB results = BannerDB.fromJson(data);
+  Future<Category> getOne({int id}) async {
+    var response = await httpManager.get(baseUrl: AppConfig().appUrlDidili,params: {
+      'action': 'get-cat-product-list',
+      'term_id': '$id',
+    });
+    var data = response['data'][0];
+    Category results = Category.fromJson(data);
     return results;
   }
 }

@@ -37,24 +37,24 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     }
 
     if (event is ProductGetOfCate) {
-      List<Product> products = await productRepository.getOfCate(event.categoryId);
+      List<ProductList> products = await productRepository.getOfCate(event.categoryId);
 
       if (true) {
         /// filter by range price
         if (event.minPrice != null) {
           products.removeWhere(
-              (element) => double.parse(element.prices.price) < event.minPrice);
+              (element) => double.parse(element.price) < event.minPrice);
           products.removeWhere(
-              (element) => double.parse(element.prices.price) > event.maxPrice);
+              (element) => double.parse(element.price) > event.maxPrice);
         }
         ///filter by price, count Review, score
         switch (event.sort) {
           case 'price_d':
             {
-              products.sort((b, a) => a.prices.price.compareTo(b.prices.price));
+              products.sort((b, a) => a.price.compareTo(b.price));
             }
             break;
-          case 'leaveComment':
+          /*case 'leaveComment':
             {
               products.sort((a, b) => a.reviewCount.compareTo(b.reviewCount));
             }
@@ -77,10 +77,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                   double.parse(a.averageRating)
                       .compareTo(double.parse(b.averageRating)));
             }
-            break;
+            break;*/
           default:
             {
-              products.sort((a, b) => a.prices.price.compareTo(b.prices.price));
+              products.sort((a, b) => a.price.compareTo(b.price));
             }
             break;
         }

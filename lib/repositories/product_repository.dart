@@ -50,16 +50,15 @@
 //   }
 // }
 
+import 'package:florist/configs/configs.dart';
 import 'package:florist/models/models.dart';
 import 'package:florist/repositories/repository.dart';
 
-class ProductRepository extends Repository{
-
+class ProductRepository extends Repository {
   Future<List<Product>> getRecom() async {
     var response = await httpManager.get(url: 'wp-json/wc/store/products');
     List data = response;
-    if(data.length > 10)
-      data = data.sublist(0,10);
+    if (data.length > 10) data = data.sublist(0, 10);
     List<Product> results = data.map((e) {
       return Product.fromJson(e);
     }).toList();
@@ -74,11 +73,15 @@ class ProductRepository extends Repository{
     return results;
   }
 
-  Future<List<Product>> getOfCate(int categoryId) async {
+  Future<List<ProductList>> getOfCate(int categoryId) async {
     // var response = await httpManager.get(url: '/api/product/productOfCate/$categoryId');
-    List response = await httpManager.get(url: 'wp-json/wc/store/products');
-    List<Product> results = response.map((e) {
-      return Product.fromJson(e);
+    var response = await httpManager.get(baseUrl: AppConfig().appUrlDidili, params: {
+      'action': 'get-cat-product-list',
+      'term_id': '$categoryId',
+    });
+    List dataTemp = response['data'][0]['product_list'];
+    List<ProductList> results = dataTemp.map((e) {
+      return ProductList.fromJson(e);
     }).toList();
     return results;
   }

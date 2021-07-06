@@ -5,13 +5,13 @@ class HTTPManager {
   BaseOptions baseOptions = BaseOptions(
     //baseUrl: 'http://10.0.2.2:8000',
     //  baseUrl: 'http://nirondemo.tk/florist/public',
-    baseUrl: 'https://hkdemo.xunchaokeji.com/',
+
     connectTimeout: 30000,
     receiveTimeout: 30000,
     responseType: ResponseType.json,
   );
 
-  Future<BaseOptions> exportOption() async {
+  Future<BaseOptions> exportOption(String baseUrl) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
 
@@ -21,6 +21,12 @@ class HTTPManager {
     if (token != null) {
       baseOptions.headers["Authorization"] = 'Bearer ' + token;
     }
+    if (baseUrl != null) {
+      baseOptions.baseUrl = baseUrl;
+    } else {
+      baseOptions.baseUrl = 'https://hkdemo.xunchaokeji.com/';
+    }
+
     return baseOptions;
   }
 
@@ -28,8 +34,9 @@ class HTTPManager {
     String url,
     dynamic data,
     Options options,
+    String baseUrl,
   }) async {
-    Dio dio = new Dio(await exportOption());
+    Dio dio = new Dio(await exportOption(baseUrl));
     try {
       final response = await dio.post(
         url,
@@ -52,8 +59,9 @@ class HTTPManager {
     String url,
     dynamic data,
     Options options,
+    String baseUrl,
   }) async {
-    Dio dio = new Dio(await exportOption());
+    Dio dio = new Dio(await exportOption(baseUrl));
     try {
       final response = await dio.put(
         url,
@@ -72,11 +80,12 @@ class HTTPManager {
     String url,
     Map<String, dynamic> params,
     Options options,
+    String baseUrl,
   }) async {
-    Dio dio = new Dio(await exportOption());
+    Dio dio = new Dio(await exportOption(baseUrl));
     try {
       final response = await dio.get(
-        url,
+        url ?? '',
         queryParameters: params,
         options: options,
       );
@@ -92,8 +101,9 @@ class HTTPManager {
     String url,
     Map<String, dynamic> params,
     Options options,
+    String baseUrl,
   }) async {
-    Dio dio = new Dio(await exportOption());
+    Dio dio = new Dio(await exportOption(baseUrl));
     try {
       final response = await dio.delete(
         url,

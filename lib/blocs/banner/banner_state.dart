@@ -6,7 +6,7 @@ abstract class BannerState {}
 class BannerInitial extends BannerState {}
 
 class BannerGetAllSuccess extends BannerState{
-  final List<BannerDB> items;
+  final List<Category> items;
 
   BannerGetAllSuccess({this.items});
 }
@@ -14,7 +14,7 @@ class BannerGetAllSuccess extends BannerState{
 class BannerGetAllFailed extends BannerState{}
 
 class BannerGetOneSuccess extends BannerState{
-  final BannerDB item;
+  final Category item;
 
   BannerGetOneSuccess({this.item});
 }

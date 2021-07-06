@@ -32,12 +32,12 @@ class _BannerScreenState extends State<BannerScreen> {
               builder: (context, state) {
                 if (state is BannerGetOneSuccess) {
                   return _Banner(
-                    image: state.item.image == null
+                    /*image: state.item.image == null
                         ? state.item.image
-                        : state.item.image.src,
+                        : state.item.image.src,*/
                     title: state.item.name,
-                    content: state.item.description,
-                    id: state.item.id,
+                    content: state.item.slug,
+                    id: state.item.termId,
                   );
                 }
                 return Center(child: Circular());
@@ -50,25 +50,27 @@ class _BannerScreenState extends State<BannerScreen> {
             BlocBuilder(
               builder: (context, state) {
                 if (state is ProductGetOfCateSuccess) {
-                  List<Product> listProduct = state.items;
+                  List<ProductList> listProduct = state.items;
                   return Column(
                     children: listProduct.map((e) {
+                      String img = e.image.substring(e.image.indexOf('src="')+5,e.image.length);
+                      img = img.substring(0,img.indexOf('"'));
                       return GestureDetector(
                         child: ProductWidget(
                           name: e.name,
-                          image: e.images[0].src,
-                          id: e.id,
-                          review: e.averageRating +
-                              AppLocalizations.t(context, 'point'),
-                          //+' (${e.ratingCount})',
-                          model: e.sku,
-                          price: e.prices.currencySymbol + e.prices.price,
+                          image: img,
+                          id: 1,
+                          review: '0' +
+                              AppLocalizations.t(context, 'point')+'(0)',
+                          model: e.slug,
+                          // price: e.prices.currencySymbol + e.prices.price,
+                            price: '\$${e.price}',
                         ),
-                        onTap: () {
+                       /* onTap: () {
                           AppBloc.productBloc.add(ProductGetOne(id: e.id));
                           AppBloc.reviewBloc.add(ReviewGetAll(productId: e.id));
                           Navigator.pushNamed(context, AppRoute.productDetail);
-                        },
+                        },*/
                       );
                     }).toList(),
                   );
@@ -90,7 +92,7 @@ class _Banner extends StatelessWidget {
   final String image;
   final String title;
   final String content;
-  final int id;
+  final String id;
 
   const _Banner({Key key, this.image, this.title, this.content, this.id})
       : super(key: key);
@@ -169,7 +171,7 @@ class _Banner extends StatelessWidget {
                 onTap: () {
                   //AppBloc.productBloc.add(ProductReset());
                   Navigator.pushNamed(context, AppRoute.filter,
-                      arguments: {'categoryId': id});
+                      arguments: {'categoryId': int.parse(id)});
                 },
               )
             ],
